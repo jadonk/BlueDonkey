@@ -1,6 +1,7 @@
-# Example from https://github.com/jacksonliam/mjpg-streamer/blob/master/mjpg-streamer-experimental/plugins/input_opencv/filters/cvfilter_py/example_filter.py
+#!/usr/bin/env python3.7
 import cv2
 import numpy
+import subprocess
 
 COLOR_THRESHOLD_MIN = 250
 COLOR_THRESHOLD_MAX = 254
@@ -43,7 +44,7 @@ roi_masks = numpy.array([
 frame_cnt = 0
 threshold = COLOR_THRESHOLD_MAX
 
-class MyFilter:
+class line_follower:
     def process(self, img):
         global frame_cnt, threshold
 
@@ -103,5 +104,14 @@ class MyFilter:
         return frame
         
 def init_filter():
-    f = MyFilter()
+    f = line_follower()
     return f.process
+
+def startup():
+    subprocess.run(["mjpg_streamer", "-i", 
+        "input_opencv.so -r 640x480 --filter /usr/local/lib/mjpg-streamer/cvfilter_py.so --fargs /var/lib/cloud9/BlueDonkey/mjs_filter.py",
+        "-o",
+        "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"], stdout=subprocess.PIPE)
+
+if __name__ == "__main__":
+    startup()
