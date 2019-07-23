@@ -199,7 +199,7 @@ class car_control:
                 (self.steering_output, self.throttle_output, 0, 0, 0)
             self.throttle_output = 0
             self.steering_output = STEERING_OFFSET
-            #time.sleep(0.001)
+            time.sleep(0.001)
         else:
             if line:
                 print_string = " %03d %03d %03d %03d %05d %05d" % \
@@ -220,18 +220,6 @@ class car_control:
         s.close()
         print("Open http://" + str(ip_addr) + ":8090 for video stream")
         print("Open http://" + str(ip_addr) + ":1880/ui for dashboard")
-
-        # Redirect input/output to a socket
-        SOCK_OUT = 3001
-        SOCK_IN = 3002
-        sock_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-        sock_out.connect(("255.255.255.255", SOCK_OUT))
-        sys.stdout = sock_out.makefile('w', buffering=None)
-        #sock_in = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        #sock_in.connect(("127.0.0.1", SOCK_IN))
-        #sys.stdin = sock_in.makefile('r', buffering=None)
 
         # Start up the pause button handler
         self.paused = PauseButtonEvent()
