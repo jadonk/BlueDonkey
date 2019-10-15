@@ -1,28 +1,13 @@
 #!/usr/bin/env python3.7
-import os, sys
-
-# Make sure we are running as 'root' under Python 3.7
-# This is only required for rcpy access through the PRU
-if not os.geteuid() == 0:
-    sys.exit("\nPlease run as root.\n")
-if sys.version_info < (3,7):
-    sys.exit("\nPlease run under python3.7\n")
-
-# Enable GPIO for XXX
-if not os.path.exists('/sys/class/gpio/gpio69'):
-    exportFile = open("/sys/class/gpio/export", "w")
-    exportFile.write("69\n")
-    exportFile.close
-
 print("Loading Python modules for car_control. Please be patient.")
-import rcpy, datetime, time, pygame, math
+import rcpy, datetime, time, math
+#import pygame
 from rcpy.servo import servo1
 from rcpy.servo import servo3
-from rcpy.button import mode, pause
+from rcpy.button import modeAI, pauseAI
 from rcpy import button
 from rcpy.led import red
 from rcpy.led import green
-import socket
 print("Done importing modules for now!")
 
 # This car_control routine was originally part of the OpenMV project.
@@ -37,7 +22,7 @@ MIXING_RATE = 0.9 # Percentage of a new line detection to mix into current steer
 
 # Tweak these values for your robocar.
 THROTTLE_CUT_OFF_ANGLE = 3.0 # Maximum angular distance from 90 before we cut speed [0.0-90.0).
-THROTTLE_CUT_OFF_RATE = 0.9 # How much to cut our speed boost (below) once the above is passed (0.0-1.0].
+THROTTLE_CUT_OFF_RATE = 0.5 # How much to cut our speed boost (below) once the above is passed (0.0-1.0].
 THROTTLE_GAIN = 60.0 # e.g. how much to speed up on a straight away
 THROTTLE_OFFSET = 40.0 # e.g. default speed (0 to 100)
 THROTTLE_P_GAIN = 1.0
@@ -48,7 +33,7 @@ THROTTLE_D_GAIN = 0.0
 
 # Tweak these values for your robocar.
 STEERING_OFFSET = 90 # Change this if you need to fix an imbalance in your car (0 to 180).
-STEERING_P_GAIN = -10.0 # Make this smaller as you increase your speed and vice versa.
+STEERING_P_GAIN = -5.0 # Make this smaller as you increase your speed and vice versa.
 STEERING_I_GAIN = 0.0
 STEERING_I_MIN = -0.0
 STEERING_I_MAX = 0.0
@@ -56,7 +41,7 @@ STEERING_D_GAIN = -7 # Make this larger as you increase your speed and vice vers
 
 # Tweak these values for your robocar.
 THROTTLE_SERVO_MIN = 0
-THROTTLE_SERVO_MAX = 0.15
+THROTTLE_SERVO_MAX = 0.25
 
 # Tweak these values for your robocar.
 STEERING_SERVO_MIN = -1.5
@@ -150,8 +135,10 @@ class car_control:
     def tick(self):
         self.fps.tick()
 
+    def pauseToggle(self):
+        self.paused.toggle()
+
     def update(self, line):
-        print_string = ""
         self.fps.stamp()
         if line:
             self.fps.update()
@@ -178,7 +165,7 @@ class car_control:
             # Figure out throttle and do throttle PID
             #
     
-            throttle_new_result = figure_out_my_throttle(self.steering_output)
+            throttle_new_result = self.figure_out_my_throttle(self.steering_output)
             throttle_delta_result = (throttle_new_result - self.throttle_old_result) if (self.throttle_old_result != None) else 0
             self.throttle_old_result = throttle_new_result
     
@@ -194,39 +181,19 @@ class car_control:
         else:
             self.throttle_output = self.throttle_output * 0.99
     
-        if self.paused.state():
-            print_string = "Paus %03d %03d %03d %05d %05d" % \
-                (self.steering_output, self.throttle_output, 0, 0, 0)
+        if self.paused.state:
             self.throttle_output = 0
             self.steering_output = STEERING_OFFSET
             time.sleep(0.001)
-        else:
-            if line:
-                print_string = " %03d %03d %03d %03d %05d %05d" % \
-                    (x, self.steering_output, self.throttle_output, 0, 0, 0)
-            else:
-                print_string = "Lost %03d %03d %03d %05d %05d" % \
-                    (self.steering_output, self.throttle_output, 0, 0, 0)
-    
+
         self.set_servos(self.throttle_output, self.steering_output)
-        print("%06.2f %s\r" % (self.fps.get(), print_string), end="")
-        return print_string
+        return(self.paused.state, self.throttle_output, self.steering_output, self.fps.get())
 
     def __init__(self):
-        # Display link to stream and dashboard
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip_addr = s.getsockname()[0]
-        s.close()
-        print("Open http://" + str(ip_addr) + ":8090 for video stream")
-        print("Open http://" + str(ip_addr) + ":1880/ui for dashboard")
-
         # Start up the pause button handler
         self.paused = PauseButtonEvent()
         self.paused.start()
-
         self.enable_steering_and_throttle()
-
         self.fps = track_fps()
 
 class PauseButtonEvent(button.ButtonEvent):
@@ -235,11 +202,14 @@ class PauseButtonEvent(button.ButtonEvent):
         # Start-up in 'paused' mode and handle button presses to exit paused mode
         red.on()
         green.off()
-        button.ButtonEvent.__init__(self, pause, button.ButtonEvent.PRESSED)
+        #button.ButtonEvent.__init__(self, pause, button.ButtonEvent.PRESSED)
+        button.ButtonEvent.__init__(self, pauseAI, button.ButtonEvent.PRESSED)
         #self.start()
     def action(self, event):
+        self.toggle()
+    def toggle(self):
         self.state = not self.state
-        if paused:
+        if self.state:
             red.on()
             green.off()
         else:
@@ -247,18 +217,20 @@ class PauseButtonEvent(button.ButtonEvent):
             red.off()
     def state(self):
         return self.state
-        
+
 class track_fps:
     delta_time = 0
     stamp_time = 0
     old_time = 0
     def __init__(self):
-        self.clock = pygame.time.Clock()
+        #self.clock = pygame.time.Clock()
         self.old_time = datetime.datetime.now()
     def tick(self):
-        self.clock.tick()
+        #self.clock.tick()
+        return
     def get(self):
-        return self.clock.get_fps()
+        #return self.clock.get_fps()
+        return 0
     def stamp(self):
         self.stamp_time = datetime.datetime.now()
         msec_stamp = int((self.stamp_time.second * 1000) + (self.stamp_time.microsecond / 1000))

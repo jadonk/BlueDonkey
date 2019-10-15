@@ -1,15 +1,15 @@
 #!/usr/bin/env python3.7
 print("Loading Python modules for line_follower. Please be patient.")
-import os, sys, socket
+import os, sys
 import cv2, numpy
 print("Done importing modules for now!")
 
 # Line follower routine implemented as an mjpg_streamer filter
 BINARY_VIEW = True # Include informational updates to image
-COLOR_THRESHOLD_MIN = 250
+COLOR_THRESHOLD_MIN = 235
 COLOR_THRESHOLD_MAX = 254
 COLOR_THRESHOLD_DELTA = 1
-PERCENT_THRESHOLD_MIN = 2
+PERCENT_THRESHOLD_MIN = 3
 PERCENT_THRESHOLD_MAX = 20
 FRAME_WIDTH = 160
 FRAME_HEIGHT = 120
@@ -20,37 +20,36 @@ FONT = cv2.FONT_HERSHEY_SIMPLEX
 roi_masks = numpy.array([
         # Focus on the center
         # 8/20ths in from the left
-        # 8/20ths down from the top
-        # 1/20ths tall
-        # 4x1 pixel count
-        [int(8*FRAME_WIDTH/20), int(8*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((4*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
-        # Then look wider
-        # 6/20ths in from the sides
-        # 9/20ths down from the top
-        # 1/20ths tall
-        # 8x1 pixel count
-        [int(6*FRAME_WIDTH/20), int(9*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((8*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
-        # Then look wider
-        # 4/20ths in from the sides
         # 10/20ths down from the top
         # 1/20ths tall
-        # 12x1 pixel count
-        [int(4*FRAME_WIDTH/20), int(10*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((12*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
-        # Then really wide and taller
-        # 0/20ths in from the sides
+        # 4x1 pixel count
+        [int(8*FRAME_WIDTH/20), int(10*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((4*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
+        # Then look wider
+        # 6/20ths in from the sides
         # 11/20ths down from the top
         # 1/20ths tall
+        # 8x1 pixel count
+        [int(6*FRAME_WIDTH/20), int(11*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((8*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
+        # Then look wider
+        # 4/20ths in from the sides
+        # 12/20ths down from the top
+        # 1/20ths tall
+        # 12x1 pixel count
+        [int(4*FRAME_WIDTH/20), int(12*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((12*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
+        # Then really wide and taller
+        # 0/20ths in from the sides
+        # 13/20ths down from the top
+        # 1/20ths tall
         # 20x1 pixel count
-        [int(0*FRAME_WIDTH/10), int(11*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((20*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
+        [int(0*FRAME_WIDTH/10), int(13*FRAME_HEIGHT/20), int(1*FRAME_HEIGHT/20), int((20*FRAME_WIDTH/20)*(1*FRAME_HEIGHT/20)/100)],
     ], dtype=numpy.int32)
     
 class mjs_filter:
     frame_cnt = 0
     threshold = COLOR_THRESHOLD_MAX
     
-    def __init__(self):
-        import car_control
-        self.c = car_control.car_control()
+    def __init__(self, car_control):
+        self.c = car_control
 
     ###########
     # Loop
@@ -96,7 +95,7 @@ class mjs_filter:
                             thresh_color = cv2.cvtColor(thresh_mask, cv2.COLOR_GRAY2BGR)
                             frame[ top : bottom , left : right ] = thresh_color
 
-            status = self.c.update(line)
+            status = self.c.update(line, self.threshold)
             if BINARY_VIEW:
                 #cv2.putText(frame, status, (10,FRAME_HEIGHT-(int(FRAME_HEIGHT/4))), FONT, 0.3, (150,150,255))
                 if line:
@@ -114,6 +113,6 @@ class mjs_filter:
 
         except Exception as e:
             print(e)
-            self.c.update(False)
+            self.c.update(False, self.threshold)
 
         return frame
