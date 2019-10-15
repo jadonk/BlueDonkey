@@ -4,7 +4,8 @@ import rcpy, datetime, time, math
 #import pygame
 from rcpy.servo import servo1
 from rcpy.servo import servo3
-from rcpy.button import modeAI, pauseAI
+#from rcpy.button import modeAI, pauseAI
+from rcpy.button import mode, pause
 from rcpy import button
 from rcpy.led import red
 from rcpy.led import green
@@ -202,8 +203,9 @@ class PauseButtonEvent(button.ButtonEvent):
         # Start-up in 'paused' mode and handle button presses to exit paused mode
         red.on()
         green.off()
-        #button.ButtonEvent.__init__(self, pause, button.ButtonEvent.PRESSED)
-        button.ButtonEvent.__init__(self, pauseAI, button.ButtonEvent.PRESSED)
+        #from rcpy.button import modeAI, pauseAI
+        button.ButtonEvent.__init__(self, pause, button.ButtonEvent.PRESSED)
+        #button.ButtonEvent.__init__(self, pauseAI, button.ButtonEvent.PRESSED)
         #self.start()
     def action(self, event):
         self.toggle()
