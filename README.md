@@ -2,11 +2,11 @@ Latest version is at https://github.com/jadonk/BlueDonkey
 
 # Setup image
 
-This is based on Debian Buster, which has support for python3-opencv.
-
 * Program the following image using Etcher.io:
   * ~~https://rcn-ee.net/rootfs/bb.org/testing/2018-12-16/buster-iot/bone-debian-buster-iot-armhf-2018-12-16-4gb.img.xz~~
-  * https://rcn-ee.net/rootfs/bb.org/testing/2019-03-24/buster-iot/bone-debian-buster-iot-armhf-2019-03-24-4gb.img.xz
+  * ~~https://rcn-ee.net/rootfs/bb.org/testing/2019-03-24/buster-iot/bone-debian-buster-iot-armhf-2019-03-24-4gb.img.xz~~
+  * AI: https://debian.beagleboard.org/images/am57xx-debian-9.9-lxqt-armhf-2019-08-03-4gb.img.xz
+  * Black/Blue: https://debian.beagleboard.org/images/bone-debian-9.9-iot-armhf-2019-08-03-4gb.img.xz
 
 * Get your board on the Internet
   * Your board should have an SSID of BeagleBone-XXXX, where XXXX is random. Password is 'BeagleBone'.
@@ -22,11 +22,11 @@ quit
 
 * Install BlueDonkey and dependencies
 ```sh
-sudo apt-get update
-sudo apt-get install -y python3-pip python3-wheel python3-opencv libopencv-dev python3-pygame
+sudo apt update
+#sudo apt install -y python3-pygame
+sudo apt install -y python3-opencv python3-libgpiod mjpg-streamer-opencv-python socat
 git clone https://github.com/jadonk/bluedonkey
 cd bluedonkey
-sudo ./install.sh
 ```
 
 # Build car
@@ -35,13 +35,15 @@ sudo ./install.sh
 
 # Run
 
-Set BINARY_VIEW if you want to save images. You'll also need to nsert a microSD card and mount it at IMG_DIR.
+```sh
+./bluedonkey.py
+```
 
 The RED LED should come up on boot.
 
 You should be able to monitor the running line follower application.
 ```sh
-bluedonkey_listen
+./bluedonkey_listen.sh
 ```
 
 Press the PAU (pause) button to start driving! The RED LED should go off and the GREEN LED should turn on.
