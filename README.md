@@ -61,6 +61,7 @@ Some useful links:
 * https://github.com/flatironinstitute/CaImAn/blob/master/caiman/base/rois.py
 * https://github.com/jokla/CarND-LaneLines-P1/blob/master/P1.ipynb
 * https://medium.com/@esmat.anis/robust-extrapolation-of-lines-in-video-using-linear-hough-transform-edd39d642ddf
+* https://github.com/jadonk/BlueDonkey-old
 
 
 
