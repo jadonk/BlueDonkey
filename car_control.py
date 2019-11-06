@@ -1,9 +1,9 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 print("Loading Python modules for car_control. Please be patient.")
-import rcpy, datetime, time, math
+import rcpy, datetime, time, math, socket, json
 #import pygame
-from rcpy.servo import servo1
-from rcpy.servo import servo3
+# from rcpy.servo import servo1
+# from rcpy.servo import servo3
 #from rcpy.button import modeAI, pauseAI
 from rcpy.button import mode, pause
 from rcpy import button
@@ -72,14 +72,75 @@ STEERING_SERVO_MAX = tmp
 
 class car_control:
     old_cx_normal = None
-
     throttle_old_result = None
     throttle_i_output = 0
     throttle_output = 0
-
     steering_old_result = None
     steering_i_output = 0
-    steering_output = STEERING_OFFSET
+    
+    def load(self, filename):
+        with open(filename, 'r') as filehandle:
+            jsonhandle = json.load(filehandle)
+        
+        FRAME_WIDTH = float(jsonhandle["FRAME_WIDTH"])
+        MIXING_RATE = float(jsonhandle["MIXING_RATE"])                            # Percentage of a new line detection to mix into current steering.
+        THROTTLE_CUT_OFF_ANGLE = float(jsonhandle["THROTTLE_CUT_OFF_ANGLE"])      # Maximum angular distance from 90 before we cut speed [0.0-90.0).
+        THROTTLE_CUT_OFF_RATE = float(jsonhandle["THROTTLE_CUT_OFF_RATE"])        # How much to cut our speed boost (below) once the above is passed (0.0-1.0].
+        THROTTLE_GAIN = float(jsonhandle["THROTTLE_GAIN"])                        # e.g. how much to speed up on a straight away
+        THROTTLE_OFFSET = float(jsonhandle["THROTTLE_OFFSET"])                    # e.g. default speed (0 to 100)
+        THROTTLE_P_GAIN = float(jsonhandle["THROTTLE_P_GAIN"])
+        THROTTLE_I_GAIN = float(jsonhandle["THROTTLE_I_GAIN"])
+        THROTTLE_I_MIN = float(jsonhandle["THROTTLE_I_MIN"])
+        THROTTLE_I_MAX = float(jsonhandle["THROTTLE_I_MAX"])
+        THROTTLE_D_GAIN = float(jsonhandle["THROTTLE_D_GAIN"])
+        STEERING_OFFSET = float(jsonhandle["STEERING_OFFSET"])                    # Change this if you need to fix an imbalance in your car (0 to 180).
+        STEERING_P_GAIN = float(jsonhandle["STEERING_P_GAIN"])                    # Make this smaller as you increase your speed and vice versa.
+        STEERING_I_GAIN = float(jsonhandle["STEERING_I_GAIN"])
+        STEERING_I_MIN = float(jsonhandle["STEERING_I_MIN"])
+        STEERING_I_MAX = float(jsonhandle["STEERING_I_MAX"])
+        STEERING_D_GAIN = float(jsonhandle["STEERING_D_GAIN"])                    # Make this larger as you increase your speed and vice versa.
+        THROTTLE_SERVO_MIN = float(jsonhandle["THROTTLE_SERVO_MIN"])
+        THROTTLE_SERVO_MAX = float(jsonhandle["THROTTLE_SERVO_MAX"])
+        STEERING_SERVO_MIN = float(jsonhandle["STEERING_SERVO_MIN"])
+        STEERING_SERVO_MAX = float(jsonhandle["STEERING_SERVO_MAX"])
+        
+        MIXING_RATE = max(min(MIXING_RATE, 1.0), 0.0)
+        THROTTLE_CUT_OFF_ANGLE = max(min(THROTTLE_CUT_OFF_ANGLE, 89.99), 0)
+        THROTTLE_CUT_OFF_RATE = max(min(THROTTLE_CUT_OFF_RATE, 1.0), 0.01)
+        THROTTLE_OFFSET = max(min(THROTTLE_OFFSET, 100), 0)
+        STEERING_OFFSET = max(min(STEERING_OFFSET, 180), 0)
+        # Handle if these were reversed...
+        tmp = max(THROTTLE_SERVO_MIN, THROTTLE_SERVO_MAX)
+        THROTTLE_SERVO_MIN = min(THROTTLE_SERVO_MIN, THROTTLE_SERVO_MAX)
+        THROTTLE_SERVO_MAX = tmp
+        # Handle if these were reversed...
+        tmp = max(STEERING_SERVO_MIN, STEERING_SERVO_MAX)
+        STEERING_SERVO_MIN = min(STEERING_SERVO_MIN, STEERING_SERVO_MAX)
+        STEERING_SERVO_MAX = tmp
+        
+        
+    def jsonreadout(self):
+        print("Frame Width: ",FRAME_WIDTH)
+        print("Mixing Rate: ",MIXING_RATE)                            # Percentage of a new line detection to mix into current steering.
+        print("Throttle_cut_off_angle: ",THROTTLE_CUT_OFF_ANGLE)      # Maximum angular distance from 90 before we cut speed [0.0-90.0).
+        print("Throttle_cut_off_rate: ",THROTTLE_CUT_OFF_RATE)        # How much to cut our speed boost (below) once the above is passed (0.0-1.0].
+        print("Throttle_Gain: ",THROTTLE_GAIN)                        # e.g. how much to speed up on a straight away
+        print("Throttle_Offset: ",THROTTLE_OFFSET)                    # e.g. default speed (0 to 100)
+        print(THROTTLE_P_GAIN)
+        print(THROTTLE_I_GAIN)
+        print(THROTTLE_I_MIN)
+        print(THROTTLE_I_MAX)
+        print(THROTTLE_D_GAIN)
+        print(STEERING_OFFSET)                    # Change this if you need to fix an imbalance in your car (0 to 180).
+        print(STEERING_P_GAIN)                    # Make this smaller as you increase your speed and vice versa.
+        print(STEERING_I_GAIN)
+        print(STEERING_I_MIN)
+        print(STEERING_I_MAX)
+        print(STEERING_D_GAIN)                    # Make this larger as you increase your speed and vice versa.
+        print(THROTTLE_SERVO_MIN)
+        print(THROTTLE_SERVO_MAX)
+        print(STEERING_SERVO_MIN)
+        print(STEERING_SERVO_MAX)
     
     def figure_out_my_steering(self, line):
         [vx,vy,x,y] = line
@@ -108,30 +169,30 @@ class car_control:
     
     # throttle [0:100] (101 values) -> [THROTTLE_SERVO_MIN, THROTTLE_SERVO_MAX]
     # steering [0:180] (181 values) -> [STEERING_SERVO_MIN, STEERING_SERVO_MAX]
-    def set_servos(self, throttle, steering):
-        throttle = THROTTLE_SERVO_MIN + ((throttle/100) * (THROTTLE_SERVO_MAX - THROTTLE_SERVO_MIN))
-        steering = STEERING_SERVO_MIN + ((steering/180) * (STEERING_SERVO_MAX - STEERING_SERVO_MIN))
-        servo3.set(throttle)
-        servo1.set(steering)
+    # def set_servos(self, throttle, steering):
+        # throttle = THROTTLE_SERVO_MIN + ((throttle/100) * (THROTTLE_SERVO_MAX - THROTTLE_SERVO_MIN))
+        # steering = STEERING_SERVO_MIN + ((steering/180) * (STEERING_SERVO_MAX - STEERING_SERVO_MIN))
+        # servo3.set(throttle)
+        # servo1.set(steering)
     
     # Enable PWM/servo outputs
     def enable_steering_and_throttle(self):
-        rcpy.servo.enable()
+        # rcpy.servo.enable()
         
         # Enable steering servo
-        servo1.set(0)
-        servo1clk = rcpy.clock.Clock(servo1, 0.02)
-        servo1clk.start()
+        # servo1.set(0)
+        # servo1clk = rcpy.clock.Clock(servo1, 0.02)
+        # servo1clk.start()
         
         # Enable throttle
-        servo3.set(0)
-        servo3clk = rcpy.clock.Clock(servo3, 0.02)
-        servo3clk.start()
+        # servo3.set(0)
+        # servo3clk = rcpy.clock.Clock(servo3, 0.02)
+        # servo3clk.start()
         time.sleep(1)
         print("Arming throttle")
-        servo3.set(-0.1)
+        # servo3.set(-0.1)
         time.sleep(3)
-        servo3.set(0)
+        # servo3.set(0)
 
     def tick(self):
         self.fps.tick()
@@ -181,21 +242,66 @@ class car_control:
             self.throttle_output = max(min(throttle_pid_output, 100), 0)
         else:
             self.throttle_output = self.throttle_output * 0.99
-    
+            self.steering_output = STEERING_OFFSET
+        
+        if not self.paused.state:
+            try:
+                client, addr = self.listener.accept()
+            except socket.timeout:
+                pass
+            except:
+                raise
+            else:
+                data = client.recv(1024).decode()
+                if data == 'PAUSE':
+                    print('Pausing after receiving \'PAUSE\' from client')
+                    self.paused.state = not self.paused.state
+                    client.send(data.encode())
+        
         if self.paused.state:
             self.throttle_output = 0
             self.steering_output = STEERING_OFFSET
-            time.sleep(0.001)
+            
+            try:
+                client, addr = self.listener.accept()
+            except socket.timeout:
+                pass
+            except:
+                raise
+            else:
+                data = client.recv(1024).decode()
+                if data == 'UNPAUSE':
+                    print('Unpausing after receiving \'UNPAUSE\' from client')
+                    self.paused.state = not self.paused.state
+                    client.send(data.encode())
+                elif data == 'LOAD':
+                    print('LOAD triggered by client')
+                    self.load('testjson.json')
+                elif data == 'JSONREADOUT':
+                    print('JSONREADOUT triggered by client')
+                    self.jsonreadout()
+                    
 
-        self.set_servos(self.throttle_output, self.steering_output)
+        # self.set_servos(self.throttle_output, self.steering_output)
         return(self.paused.state, self.throttle_output, self.steering_output, self.fps.get())
 
     def __init__(self):
         # Start up the pause button handler
+        self.load('testjson.json')
+        print("LOAD COMPLETE MWUAHAHA")
         self.paused = PauseButtonEvent()
         self.paused.start()
         self.enable_steering_and_throttle()
         self.fps = track_fps()
+        
+        self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.listener.bind(('127.0.0.1', 3002))
+        self.listener.settimeout(0.001)
+        print('listening on 127.0.0.1:3002')
+        self.listener.listen(5)
+        
+        
+        
 
 class PauseButtonEvent(button.ButtonEvent):
     state = True
