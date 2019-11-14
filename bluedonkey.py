@@ -2,6 +2,11 @@
 import os, sys, subprocess, socket
 #import cgroups
 
+
+
+
+
+
 def start_mjpg_streamer():
     print("Starting up mjpg_streamer.")
     # TODO: Add notification if either mjpg-streamer or cvfilter_py.so aren't installed
@@ -26,20 +31,26 @@ def init_filter():
     #print("Run bluedonkey_listen.sh to listen for messages")
 
     # Redirect input/output to a socket
-    SOCK_OUT = 3001
+    #STD_OUT = 3003
+    
     #SOCK_IN = 3002
-    sock_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    
+    #std_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    
     #sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    sock_out.connect(("", SOCK_OUT))
-    sys.stdout = sock_out.makefile('w', buffering=None)
+    
+    #std_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    #std_out.connect(("", STD_OUT))
+    #sys.stdout = std_out.makefile('w', buffering=None)
+    
     #errorfile = open("/tmp/bluedonkey.err.txt", 'w+')
     #sys.stderr = errorfile
-    sys.stderr = sys.stdout
+    
+    #sys.stderr = sys.stdout
+    
     #sock_in = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     #sock_in.connect(("127.0.0.1", SOCK_IN))
     #sys.stdin = sock_in.makefile('r', buffering=None)
-   
 
     #cg = cgroups.Cgroup('bluedonkey')
     #pid  = os.getpid()
@@ -56,6 +67,13 @@ class dummy_car_control():
         ## Commented per jkridner's advice
         import car_control
         self.c = car_control.car_control()
+        
+        #Output for the status
+        self.status_port = 3004
+        self.status_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.status_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self.status_out.connect(("", self.status_port))
+        self.status_file = self.status_out.makefile('w', buffering=None)
         #pass
 
     def tick(self):
@@ -65,16 +83,15 @@ class dummy_car_control():
     def update(self, line, threshold):
         (paused, throttle, steering, fps) = self.c.update(line)
         if paused:
-            print("P ", end="", flush=False)
+            print("P ", end="", flush=False, file=self.status_file)
         else:
-            print("  ", end="", flush=False)
+            print("  ", end="", flush=False, file=self.status_file)
         if line:
-            print("%03d %03d " % (line[2], line[3]), end="", flush=False)
+            print("%03d %03d " % (line[2], line[3]), end="", flush=False, file=self.status_file)
         else:
-            print("No line ", end="", flush=False)
-        print("%06.2f %06.2f" % (throttle, steering), end="", flush=False)
-        print(" %04.1f" % (fps), end="", flush=False)
-        print(" %03d" % (threshold), end="", flush=False)
-        print("\r", end="", flush=True)
+            print("No line ", end="", flush=False, file=self.status_file)
+        print("%06.2f %06.2f" % (throttle, steering), end="", flush=False, file=self.status_file)
+        print(" %04.1f" % (fps), end="", flush=False, file=self.status_file)
+        print(" %03d" % (threshold), end="", flush=False, file=self.status_file)
+        print("\r", end="", flush=True, file=self.status_file)
         return ""
-
