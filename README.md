@@ -44,7 +44,7 @@ You should be able to monitor now via the car dashboard. If non-standard IP addr
 http://192.168.8.1:1880/ui
 
 The below image is of the dashboard. You can see the console, which returns any outputs of the program. 
-https://drive.google.com/open?id=1TdTvL4fE4kOcIZy-1ycWyaP5opw_zlrD
+https://drive.google.com/open?id=1gZCFzgkllzltCmJJPIysWpE9E11PsNxo
 This can also be redirected to the bluedonkey_listener.sh program. This can be useful as the dashboard console is overwritten every update and will only flicker with responses. 
 
 Switching the Pause/Unpause switch will pause or unpause the car. 
