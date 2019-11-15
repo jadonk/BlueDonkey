@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os, sys, subprocess, socket
+from random import randint
 #import cgroups
 
 
@@ -81,8 +82,8 @@ class dummy_car_control():
         return
 
     def update(self, line, threshold):
-        (paused, throttle, steering, fps) = self.c.update(line)
-        if paused:
+        (self.paused, self.throttle, self.steering, self.fps) = self.c.update(line)
+        if self.paused:
             print("P ", end="", flush=False, file=self.status_file)
         else:
             print("  ", end="", flush=False, file=self.status_file)
@@ -90,8 +91,9 @@ class dummy_car_control():
             print("%03d %03d " % (line[2], line[3]), end="", flush=False, file=self.status_file)
         else:
             print("No line ", end="", flush=False, file=self.status_file)
-        print("%06.2f %06.2f" % (throttle, steering), end="", flush=False, file=self.status_file)
-        print(" %04.1f" % (fps), end="", flush=False, file=self.status_file)
-        print(" %03d" % (threshold), end="", flush=False, file=self.status_file)
+        print("%06.2f %06.2f" % (self.throttle, self.steering), end="", flush=False, file=self.status_file)
+        print(" %04.1f" % (self.fps), end="", flush=False, file=self.status_file)
+        print(" %03d" % (threshold), end=" ", flush=False, file=self.status_file)
+        print("Live Tracker: ",randint(0,100), flush=False, file=self.status_file)
         print("\r", end="", flush=True, file=self.status_file)
         return ""
