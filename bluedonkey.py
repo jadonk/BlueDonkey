@@ -4,10 +4,6 @@ from random import randint
 #import cgroups
 
 
-
-
-
-
 def start_mjpg_streamer():
     print("Starting up mjpg_streamer.")
     # TODO: Add notification if either mjpg-streamer or cvfilter_py.so aren't installed
@@ -17,46 +13,15 @@ def start_mjpg_streamer():
         "-o",
         "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],
         stdin=subprocess.PIPE
-        #, stdout=subprocess.PIPE
-        #, stderr=subprocess.PIPE                   #GIVE ME OUTPUT
+        #, stdout=subprocess.PIPE       #Commented to allow visibility of
+        #, stderr=subprocess.PIPE       #responses from the system on commandline
         )
 
 if __name__ == "__main__":
     start_mjpg_streamer()
 
 def init_filter():
-    # Display link to stream and dashboard
-    #ip_addr = "localhost"
-    #print("Open http://" + str(ip_addr) + ":8090/?action=stream for video stream")
-    #print("Open http://" + str(ip_addr) + ":1880/ui for dashboard")
-    #print("Run bluedonkey_listen.sh to listen for messages")
-
-    # Redirect input/output to a socket
-    #STD_OUT = 3003
-    
-    #SOCK_IN = 3002
-    
-    #std_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    
-    #sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    
-    #std_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    #std_out.connect(("", STD_OUT))
-    #sys.stdout = std_out.makefile('w', buffering=None)
-    
-    #errorfile = open("/tmp/bluedonkey.err.txt", 'w+')
-    #sys.stderr = errorfile
-    
-    #sys.stderr = sys.stdout
-    
-    #sock_in = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    #sock_in.connect(("127.0.0.1", SOCK_IN))
-    #sys.stdin = sock_in.makefile('r', buffering=None)
-
-    #cg = cgroups.Cgroup('bluedonkey')
-    #pid  = os.getpid()
-    #cg.add(pid)
-    #cg.set_cpu_limit(50)
+    ## Socket streams that were here previously are now moved to multiple sockets where they are used.
     import line_follower
     dc = dummy_car_control()
     f = line_follower.mjs_filter(dc)
@@ -69,13 +34,13 @@ class dummy_car_control():
         import car_control
         self.c = car_control.car_control()
         
-        #Output for the status
+        #Output for the status in update method below
         self.status_port = 3004
         self.status_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.status_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         self.status_out.connect(("", self.status_port))
+        # This filehandle sends the data from the socket broadcast
         self.status_file = self.status_out.makefile('w', buffering=None)
-        #pass
 
     def tick(self):
         self.c.tick()
@@ -83,6 +48,9 @@ class dummy_car_control():
 
     def update(self, line, threshold):
         (self.paused, self.throttle, self.steering, self.fps) = self.c.update(line)
+        
+        # Code has been reworked to output to a separate filehandle pointing 
+        # to the socket 3004, output to the dashboard under 'Status'
         if self.paused:
             print("P ", end="", flush=False, file=self.status_file)
         else:

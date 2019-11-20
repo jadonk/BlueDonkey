@@ -7,25 +7,6 @@
         "info": ""
     },
     {
-        "id": "c6c1e3de.19c52",
-        "type": "ui_template",
-        "z": "a1e29da3.5e856",
-        "group": "dca8a51e.80c9e8",
-        "name": "",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "format": "<img src=\"https://hackster.imgix.net/uploads/attachments/464262/beagleboneblue_blink_LED.png?auto=compress%2Cformat&amp;w=1280&amp;h=960&amp;fit=max\" />\n",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "templateScope": "local",
-        "x": 360,
-        "y": 20,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "bbf157e5.7ca138",
         "type": "inject",
         "z": "a1e29da3.5e856",
@@ -41,7 +22,6 @@
         "y": 60,
         "wires": [
             [
-                "c6c1e3de.19c52",
                 "180010c6.9dd4af"
             ]
         ]
@@ -206,7 +186,7 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
         "x": 830,
         "y": 460,
         "wires": []
@@ -278,32 +258,6 @@
         "payloadType": "str",
         "topic": "",
         "x": 170,
-        "y": 460,
-        "wires": [
-            [
-                "628bc9b1.355b28"
-            ]
-        ]
-    },
-    {
-        "id": "3a3850c.01f1ab",
-        "type": "ui_button",
-        "z": "a1e29da3.5e856",
-        "name": "",
-        "group": "be4b9b84.158958",
-        "order": 3,
-        "width": "0",
-        "height": "0",
-        "passthru": false,
-        "label": "jsonreadout",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "icon": "",
-        "payload": "jsonreadout",
-        "payloadType": "str",
-        "topic": "",
-        "x": 150,
         "y": 400,
         "wires": [
             [
@@ -338,7 +292,7 @@
         "group": "d1a91399.ff32",
         "order": 0,
         "width": "6",
-        "height": "5",
+        "height": "6",
         "name": "",
         "label": "Log:",
         "format": "{{msg.payload}}",
@@ -377,7 +331,8 @@
         "wires": [
             [
                 "4011caed.41e404",
-                "16691798.ad5f58"
+                "16691798.ad5f58",
+                "37182740.e02288"
             ]
         ]
     },
@@ -392,7 +347,7 @@
         "name": "",
         "label": "Variables:",
         "format": "{{msg.payload}}",
-        "layout": "row-left",
+        "layout": "row-spread",
         "x": 1060,
         "y": 420,
         "wires": []
@@ -412,15 +367,258 @@
         "wires": []
     },
     {
-        "id": "dca8a51e.80c9e8",
-        "type": "ui_group",
-        "z": "",
-        "name": "Board",
-        "tab": "a79d6d91.58072",
-        "order": 6,
-        "disp": true,
-        "width": "8",
-        "collapse": false
+        "id": "37182740.e02288",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "844e7c5a.d23f3",
+        "order": 26,
+        "width": "6",
+        "height": "10",
+        "name": "",
+        "label": "Current",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1040,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a8b60d9.6fb37f",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 720,
+        "y": 740,
+        "wires": [
+            [
+                "c38a24ef.818298"
+            ]
+        ]
+    },
+    {
+        "id": "c38a24ef.818298",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 920,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "402e4b4d.dfb504",
+        "type": "ui_form",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "label": "Test",
+        "group": "74800c24.ed1014",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Frame Width",
+                "value": "FRAME_WIDTH",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Mixing Rate",
+                "value": "MIXING_RATE",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Cut Off Angle",
+                "value": "THROTTLE_CUT_OFF_ANGLE",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Cut Off Rate",
+                "value": "THROTTLE_CUT_OFF_RATE",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Gain",
+                "value": "THROTTLE_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Offset",
+                "value": "THROTTLE_OFFSET",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle P Gain",
+                "value": "THROTTLE_P_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle I Gain",
+                "value": "THROTTLE_I_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle I Min",
+                "value": "THROTTLE_I_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle I Max",
+                "value": "THROTTLE_I_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle D Gain",
+                "value": "THROTTLE_D_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering Offset",
+                "value": "STEERING_OFFSET",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering P Gain",
+                "value": "STEERING_P_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering I Gain",
+                "value": "STEERING_I_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering I Min",
+                "value": "STEERING_I_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering I Max",
+                "value": "STEERING_I_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering D Gain",
+                "value": "STEERING_D_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Servo Min",
+                "value": "THROTTLE_SERVO_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Servo Max",
+                "value": "THROTTLE_SERVO_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering Servo Min",
+                "value": "STEERING_SERVO_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering Servo Max",
+                "value": "STEERING_SERVO_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Color Threshold Min",
+                "value": "COLOR_THRESHOLD_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Color Threshold Max",
+                "value": "COLOR_THRESHOLD_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Color Threshold Delta",
+                "value": "COLOR_THRESHOLD_DELTA",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Percent Threshold Min",
+                "value": "PERCENT_THRESHOLD_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Percent Threshold Max",
+                "value": "PERCENT_THRESHOLD_MAX",
+                "type": "number",
+                "required": false
+            }
+        ],
+        "formValue": {
+            "FRAME_WIDTH": "",
+            "MIXING_RATE": "",
+            "THROTTLE_CUT_OFF_ANGLE": "",
+            "THROTTLE_CUT_OFF_RATE": "",
+            "THROTTLE_GAIN": "",
+            "THROTTLE_OFFSET": "",
+            "THROTTLE_P_GAIN": "",
+            "THROTTLE_I_GAIN": "",
+            "THROTTLE_I_MIN": "",
+            "THROTTLE_I_MAX": "",
+            "THROTTLE_D_GAIN": "",
+            "STEERING_OFFSET": "",
+            "STEERING_P_GAIN": "",
+            "STEERING_I_GAIN": "",
+            "STEERING_I_MIN": "",
+            "STEERING_I_MAX": "",
+            "STEERING_D_GAIN": "",
+            "THROTTLE_SERVO_MIN": "",
+            "THROTTLE_SERVO_MAX": "",
+            "STEERING_SERVO_MIN": "",
+            "STEERING_SERVO_MAX": "",
+            "COLOR_THRESHOLD_MIN": "",
+            "COLOR_THRESHOLD_MAX": "",
+            "COLOR_THRESHOLD_DELTA": "",
+            "PERCENT_THRESHOLD_MIN": "",
+            "PERCENT_THRESHOLD_MAX": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 600,
+        "y": 860,
+        "wires": [
+            [
+                "a8b60d9.6fb37f"
+            ]
+        ]
     },
     {
         "id": "a30aeb1b.ead7c8",
@@ -455,11 +653,24 @@
         "collapse": false
     },
     {
-        "id": "a79d6d91.58072",
-        "type": "ui_tab",
-        "name": "Tab 2",
-        "icon": "dashboard",
-        "order": 2
+        "id": "844e7c5a.d23f3",
+        "type": "ui_group",
+        "z": "",
+        "name": "Current",
+        "tab": "a79d6d91.58072",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "74800c24.ed1014",
+        "type": "ui_group",
+        "z": "",
+        "name": "Save",
+        "tab": "a79d6d91.58072",
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "8facd9f3.a18cb8",
@@ -468,6 +679,16 @@
         "name": "BeagleBone AI - BlueDonkey",
         "icon": "dashboard",
         "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a79d6d91.58072",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Editor",
+        "icon": "dashboard",
+        "order": 2,
         "disabled": false,
         "hidden": false
     }
