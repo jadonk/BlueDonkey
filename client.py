@@ -18,8 +18,12 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Initiate connection
 s.connect(('127.0.0.1', 3002))
 
-# Send command-line argument
-s.send(sys.argv[1].upper().encode())
+# Send commandline arguments
+if len(sys.argv) == 3:
+    s.send(sys.argv[1].upper().encode() +" ".encode()+ sys.argv[2].encode())
+    print(sys.argv[2])
+else:
+    s.send(sys.argv[1].upper().encode())
 
 # Receive response
 data = s.recv(1024).decode()

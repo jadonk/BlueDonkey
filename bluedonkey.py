@@ -11,14 +11,15 @@ def start_mjpg_streamer():
     subprocess.run(["mjpg_streamer", "-i",
         "input_opencv.so -r 640x480 --filter /usr/lib/mjpg-streamer/cvfilter_py.so --fargs " + os.path.realpath(__file__),
         "-o",
-        "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],
+        "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],         ## DISABLE CAMERA FOR DEBUG  -- RE-ENEABLE
         stdin=subprocess.PIPE
         #, stdout=subprocess.PIPE       #Commented to allow visibility of
         #, stderr=subprocess.PIPE       #responses from the system on commandline
         )
 
 if __name__ == "__main__":
-    start_mjpg_streamer()
+    start_mjpg_streamer()                      
+    pass
 
 def init_filter():
     ## Socket streams that were here previously are now moved to multiple sockets where they are used.

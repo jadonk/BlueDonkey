@@ -7,6 +7,186 @@
         "info": ""
     },
     {
+        "id": "a30aeb1b.ead7c8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Camera",
+        "tab": "8facd9f3.a18cb8",
+        "order": 4,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "be4b9b84.158958",
+        "type": "ui_group",
+        "z": "",
+        "name": "Controls",
+        "tab": "8facd9f3.a18cb8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d1a91399.ff32",
+        "type": "ui_group",
+        "z": "",
+        "name": "Console",
+        "tab": "8facd9f3.a18cb8",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "a79d6d91.58072",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Editor",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8facd9f3.a18cb8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home Page",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c305f5.d1c35a08",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "844e7c5a.d23f3",
+        "type": "ui_group",
+        "z": "",
+        "name": "Current",
+        "tab": "a79d6d91.58072",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "74800c24.ed1014",
+        "type": "ui_group",
+        "z": "",
+        "name": "Edit Settings",
+        "tab": "a79d6d91.58072",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "335773c9.b51f3c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Settings ",
+        "tab": "8facd9f3.a18cb8",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
         "id": "bbf157e5.7ca138",
         "type": "inject",
         "z": "a1e29da3.5e856",
@@ -18,8 +198,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 100,
-        "y": 60,
+        "x": 140,
+        "y": 100,
         "wires": [
             [
                 "180010c6.9dd4af"
@@ -39,8 +219,8 @@
         "storeOutMessages": true,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 880,
-        "y": 180,
+        "x": 600,
+        "y": 120,
         "wires": [
             []
         ]
@@ -53,8 +233,8 @@
         "func": "msg.payload = \"http://\" + msg.payload[0].address + \":8090/?action=stream\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 620,
-        "y": 140,
+        "x": 420,
+        "y": 120,
         "wires": [
             [
                 "ec92c923.57f488",
@@ -72,8 +252,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 890,
-        "y": 100,
+        "x": 610,
+        "y": 80,
         "wires": []
     },
     {
@@ -86,8 +266,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 630,
-        "y": 60,
+        "x": 430,
+        "y": 80,
         "wires": []
     },
     {
@@ -101,8 +281,8 @@
         "multicast": "false",
         "group": "",
         "datatype": "utf8",
-        "x": 120,
-        "y": 260,
+        "x": 300,
+        "y": 200,
         "wires": [
             [
                 "71100067.eba35",
@@ -122,8 +302,8 @@
         "label": "Status:",
         "format": "{{msg.payload}}",
         "layout": "row-left",
-        "x": 390,
-        "y": 300,
+        "x": 450,
+        "y": 220,
         "wires": []
     },
     {
@@ -136,8 +316,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 410,
-        "y": 220,
+        "x": 470,
+        "y": 180,
         "wires": []
     },
     {
@@ -145,7 +325,7 @@
         "type": "hostip",
         "z": "a1e29da3.5e856",
         "name": "Host IP",
-        "x": 360,
+        "x": 280,
         "y": 100,
         "wires": [
             [
@@ -165,8 +345,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 500,
-        "y": 460,
+        "x": 600,
+        "y": 500,
         "wires": [
             [
                 "9c8641da.63b71"
@@ -182,13 +362,13 @@
         "type": "debug",
         "z": "a1e29da3.5e856",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
         "x": 830,
-        "y": 460,
+        "y": 500,
         "wires": []
     },
     {
@@ -214,7 +394,7 @@
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
-        "x": 140,
+        "x": 360,
         "y": 520,
         "wires": [
             [
@@ -235,8 +415,8 @@
         "label": "",
         "format": "{{msg.payload}}d",
         "layout": "row-spread",
-        "x": 410,
-        "y": 580,
+        "x": 510,
+        "y": 540,
         "wires": []
     },
     {
@@ -257,8 +437,8 @@
         "payload": "load",
         "payloadType": "str",
         "topic": "",
-        "x": 170,
-        "y": 400,
+        "x": 390,
+        "y": 480,
         "wires": [
             [
                 "628bc9b1.355b28"
@@ -276,7 +456,7 @@
         "multicast": "false",
         "group": "",
         "datatype": "utf8",
-        "x": 600,
+        "x": 300,
         "y": 280,
         "wires": [
             [
@@ -297,8 +477,8 @@
         "label": "Log:",
         "format": "{{msg.payload}}",
         "layout": "row-left",
-        "x": 870,
-        "y": 320,
+        "x": 450,
+        "y": 300,
         "wires": []
     },
     {
@@ -311,8 +491,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 890,
-        "y": 240,
+        "x": 470,
+        "y": 260,
         "wires": []
     },
     {
@@ -326,31 +506,14 @@
         "multicast": "false",
         "group": "",
         "datatype": "utf8",
-        "x": 780,
-        "y": 380,
+        "x": 300,
+        "y": 360,
         "wires": [
             [
-                "4011caed.41e404",
                 "16691798.ad5f58",
-                "37182740.e02288"
+                "4ef1d15.2699d3"
             ]
         ]
-    },
-    {
-        "id": "4011caed.41e404",
-        "type": "ui_text",
-        "z": "a1e29da3.5e856",
-        "group": "d1a91399.ff32",
-        "order": 0,
-        "width": "6",
-        "height": "5",
-        "name": "",
-        "label": "Variables:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 1060,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "16691798.ad5f58",
@@ -362,24 +525,8 @@
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 1070,
+        "x": 470,
         "y": 340,
-        "wires": []
-    },
-    {
-        "id": "37182740.e02288",
-        "type": "ui_text",
-        "z": "a1e29da3.5e856",
-        "group": "844e7c5a.d23f3",
-        "order": 26,
-        "width": "6",
-        "height": "10",
-        "name": "",
-        "label": "Current",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 1040,
-        "y": 460,
         "wires": []
     },
     {
@@ -388,13 +535,13 @@
         "z": "a1e29da3.5e856",
         "name": "",
         "property": "payload",
-        "action": "str",
-        "pretty": true,
-        "x": 720,
-        "y": 740,
+        "action": "",
+        "pretty": false,
+        "x": 550,
+        "y": 800,
         "wires": [
             [
-                "c38a24ef.818298"
+                "10c75d3e.353863"
             ]
         ]
     },
@@ -403,25 +550,25 @@
         "type": "debug",
         "z": "a1e29da3.5e856",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 920,
-        "y": 760,
+        "x": 970,
+        "y": 800,
         "wires": []
     },
     {
         "id": "402e4b4d.dfb504",
         "type": "ui_form",
         "z": "a1e29da3.5e856",
-        "name": "",
-        "label": "Test",
+        "name": "Settings Form",
+        "label": "",
         "group": "74800c24.ed1014",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "6",
+        "height": "5",
         "options": [
             {
                 "label": "Frame Width",
@@ -612,8 +759,256 @@
         "submit": "submit",
         "cancel": "cancel",
         "topic": "",
-        "x": 600,
-        "y": 860,
+        "x": 70,
+        "y": 820,
+        "wires": [
+            [
+                "10c75d3e.353863",
+                "a1145436.d7ff88"
+            ]
+        ]
+    },
+    {
+        "id": "d2f3ad9e.d2aca",
+        "type": "inject",
+        "z": "a1e29da3.5e856",
+        "name": "startup",
+        "topic": "",
+        "payload": "pause",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 200,
+        "y": 520,
+        "wires": [
+            [
+                "c4af34c1.b34fd8"
+            ]
+        ]
+    },
+    {
+        "id": "3702c707.48dff8",
+        "type": "ui_ui_control",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "x": 500,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6bfed34d.0aab4c",
+        "type": "ui_button",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "group": "be4b9b84.158958",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Open Editor",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Editor",
+        "payloadType": "str",
+        "topic": "",
+        "x": 350,
+        "y": 620,
+        "wires": [
+            [
+                "3702c707.48dff8"
+            ]
+        ]
+    },
+    {
+        "id": "516e0df.6f2cdf4",
+        "type": "ui_table",
+        "z": "a1e29da3.5e856",
+        "group": "335773c9.b51f3c",
+        "name": "Home Settings Table",
+        "order": 0,
+        "width": "6",
+        "height": "15",
+        "columns": [
+            {
+                "field": "Name",
+                "title": "Variable",
+                "width": "70%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Value",
+                "title": "Value",
+                "width": "",
+                "align": "right",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 660,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "9fd65c63.940b8",
+        "type": "ui_ui_control",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "x": 500,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "90221c80.9567d",
+        "type": "ui_button",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "group": "844e7c5a.d23f3",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Return Home",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Home Page",
+        "payloadType": "str",
+        "topic": "",
+        "x": 350,
+        "y": 580,
+        "wires": [
+            [
+                "9fd65c63.940b8"
+            ]
+        ]
+    },
+    {
+        "id": "4ef1d15.2699d3",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "516e0df.6f2cdf4",
+                "aa7a0588.efb518"
+            ]
+        ]
+    },
+    {
+        "id": "aa7a0588.efb518",
+        "type": "ui_table",
+        "z": "a1e29da3.5e856",
+        "group": "844e7c5a.d23f3",
+        "name": "Editor Settings Table",
+        "order": 0,
+        "width": "6",
+        "height": "15",
+        "columns": [
+            {
+                "field": "Name",
+                "title": "Variable",
+                "width": "70%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Value",
+                "title": "Value",
+                "width": "",
+                "align": "right",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 660,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6aa429af.9d8698",
+        "type": "function",
+        "z": "a1e29da3.5e856",
+        "name": "Replace Null",
+        "func": "\n// For each key, if value is null then set to \n// value in node_values.json\nfor (var key in msg.payload[0]) {\n    if ( msg.payload[0][key] === null ){\n        msg.payload[0][key] = msg.payload[1][key];\n    }\n}\n// For each missing key, add it from \n// node_values.json\nfor (var key in msg.payload[1]) {\n    if (!(key in msg.payload[0])) {\n        msg.payload[0][key] = msg.payload[1][key];\n    }\n}\n// Create single output\nmsg.payload = msg.payload[0];\n// Send msg onward\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 820,
+        "wires": [
+            [
+                "c38a24ef.818298",
+                "2cf9d6d5.50fefa"
+            ]
+        ]
+    },
+    {
+        "id": "10c75d3e.353863",
+        "type": "join",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 670,
+        "y": 820,
+        "wires": [
+            [
+                "6aa429af.9d8698"
+            ]
+        ]
+    },
+    {
+        "id": "fef35dc8.ce7f3",
+        "type": "file in",
+        "z": "a1e29da3.5e856",
+        "name": "node_values.json",
+        "filename": "/home/debian/bluedonkey/profiles/node_values.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 390,
+        "y": 800,
         "wires": [
             [
                 "a8b60d9.6fb37f"
@@ -621,75 +1016,119 @@
         ]
     },
     {
-        "id": "a30aeb1b.ead7c8",
-        "type": "ui_group",
-        "z": "",
-        "name": "Camera",
-        "tab": "8facd9f3.a18cb8",
+        "id": "a1145436.d7ff88",
+        "type": "delay",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": ".2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 220,
+        "y": 800,
+        "wires": [
+            [
+                "fef35dc8.ce7f3"
+            ]
+        ]
+    },
+    {
+        "id": "cc3d42c2.592",
+        "type": "file",
+        "z": "a1e29da3.5e856",
+        "name": "node_values.json",
+        "filename": "/home/debian/bluedonkey/profiles/node_values.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 1110,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2cf9d6d5.50fefa",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 950,
+        "y": 840,
+        "wires": [
+            [
+                "cc3d42c2.592"
+            ]
+        ]
+    },
+    {
+        "id": "37a89360.64e59c",
+        "type": "ui_button",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "group": "be4b9b84.158958",
         "order": 4,
-        "disp": true,
-        "width": "8",
-        "collapse": false
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Load values from Node",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "loadnode",
+        "payloadType": "str",
+        "topic": "",
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "628bc9b1.355b28"
+            ]
+        ]
     },
     {
-        "id": "d1a91399.ff32",
-        "type": "ui_group",
-        "z": "",
-        "name": "Console",
-        "tab": "8facd9f3.a18cb8",
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
-        "id": "be4b9b84.158958",
-        "type": "ui_group",
-        "z": "",
-        "name": "Controls",
-        "tab": "8facd9f3.a18cb8",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
-        "id": "844e7c5a.d23f3",
-        "type": "ui_group",
-        "z": "",
-        "name": "Current",
-        "tab": "a79d6d91.58072",
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
-        "id": "74800c24.ed1014",
-        "type": "ui_group",
-        "z": "",
-        "name": "Save",
-        "tab": "a79d6d91.58072",
-        "disp": true,
-        "width": "6",
-        "collapse": false
-    },
-    {
-        "id": "8facd9f3.a18cb8",
-        "type": "ui_tab",
-        "z": "",
-        "name": "BeagleBone AI - BlueDonkey",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "a79d6d91.58072",
-        "type": "ui_tab",
-        "z": "",
-        "name": "Editor",
-        "icon": "dashboard",
-        "order": 2,
-        "disabled": false,
-        "hidden": false
+        "id": "688646f1.6fe5d8",
+        "type": "ui_dropdown",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "be4b9b84.158958",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "Node Values",
+                "value": "LOADCUSTOM ./profiles/node_values.json",
+                "type": "str"
+            },
+            {
+                "label": "Default Values",
+                "value": "LOADCUSTOM ./profiles/default_values.json",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 80,
+        "y": 660,
+        "wires": [
+            [
+                "628bc9b1.355b28",
+                "9c8641da.63b71"
+            ]
+        ]
     }
 ]
