@@ -85,6 +85,8 @@ class car_control:
         self.tabledata = []
         # Throw all of the dicts into the list
         for key in self.jsondata:
+            if key == 'BINARY_VIEW':
+                continue;
             self.tabledata.append({ "Name":key, "Value":self.jsondata[key] })
         # Print the list -- This will cause a Node-RED error that can be ignored
         print(json.dumps(self.tabledata, sort_keys=True), file=self.vari_file, flush=True)
@@ -189,6 +191,10 @@ class car_control:
             self.throttle_output = max(min(throttle_pid_output, 100), 0)
         else:
             self.throttle_output = self.throttle_output * 0.99
+            # adding because self.throttle_output would infinitely decrease and this would show up in output
+            # if you want to track movements that small then please ramove the next two lines
+            if (self.throttle_output < 0.01):
+                self.throttle_output = 0;
             self.steering_output = self.jsondata["STEERING_OFFSET"]
             
         # Call jsonreadout() method to update the variables on the dashboard
