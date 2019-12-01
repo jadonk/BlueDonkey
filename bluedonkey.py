@@ -4,79 +4,71 @@ import os, sys, subprocess, socket
 
 def start_mjpg_streamer():
     print("Starting up mjpg_streamer.")
-    # TODO: Add notification if either mjpg-streamer or cvfilter_py.so aren't installed
-    # TODO: Detect any error if process exits, such as the uvcvideo crash I'm seeing
+    # TODO: Add notification if either mjpg-streamer or
+    #       cvfilter_py.so aren't installed
+    # TODO: Detect any error if process exits, 
+    #       such as the uvcvideo crash I'm seeing
     subprocess.run(["mjpg_streamer", "-i",
         "input_opencv.so -r 640x480 --filter /usr/lib/mjpg-streamer/cvfilter_py.so --fargs " + os.path.realpath(__file__),
         "-o",
         "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE)
+        stdin=subprocess.PIPE
+        #, stdout=subprocess.PIPE   #Commented to allow visibility of
+        #, stderr=subprocess.PIPE   #responses from the system on commandline
+        )
 
 if __name__ == "__main__":
     start_mjpg_streamer()
 
+# This method is called by the mjpg_streamer command run above. 
+# This is what calls and executes the running code
 def init_filter():
-    # Display link to stream and dashboard
-    print("Finding IP address...")
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    ip_addr = s.getsockname()[0]
-    s.close()
-    if not ip_addr:
-        ip_addr = "localhost"
-    print("Open http://" + str(ip_addr) + ":8090/?action=stream for video stream")
-    print("Open http://" + str(ip_addr) + ":1880/ui for dashboard")
-    print("Run bluedonkey_listen.sh to listen for messages")
-
-    # Redirect input/output to a socket
-    SOCK_OUT = 3001
-    SOCK_IN = 3002
-    sock_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    sock_out.connect(("255.255.255.255", SOCK_OUT))
-    sys.stdout = sock_out.makefile('w', buffering=None)
-    #errorfile = open("/tmp/bluedonkey.err.txt", 'w+')
-    #sys.stderr = errorfile
-    sys.stderr = sys.stdout
-    sock_in = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock_in.connect(("127.0.0.1", SOCK_IN))
-    sys.stdin = sock_in.makefile('r', buffering=None)
-
-    #cg = cgroups.Cgroup('bluedonkey')
-    #pid  = os.getpid()
-    #cg.add(pid)
-    #cg.set_cpu_limit(50)
+    ##  Socket streams that were here previously are 
+    ##  now moved to multiple sockets where they are used.
     import line_follower
     dc = dummy_car_control()
     f = line_follower.mjs_filter(dc)
     print("Returning process")
     return f.process
 
+# This class houses the car_control class
 class dummy_car_control():
     def __init__(self):
+        ## Commented per jkridner's advice
         import car_control
         self.c = car_control.car_control()
+        
+        #Output for the status in update method below
+        self.status_port = 3004
+        self.status_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.status_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        self.status_out.connect(("", self.status_port))
+        # This filehandle sends the data to the socket broadcast
+        self.status_file = self.status_out.makefile('w', buffering=None)
 
     def tick(self):
         self.c.tick()
         return
 
     def update(self, line, threshold):
-        (paused, throttle, steering, fps) = self.c.update(line)
-        if paused:
-            print("P ", end="", flush=False)
+        (self.paused, self.throttle, self.steering, self.fps) = \
+            self.c.update(line)
+        
+        # Code has been reworked to output to a separate filehandle pointing 
+        # to the socket 3004, output to the dashboard under 'Status'
+        # Replaced the Status output below to be a JSON string
+        stri = "{"
+        if self.paused:
+            stri += '"Status":"Paused"'
         else:
-            print("  ", end="", flush=False)
+            stri += '"Status":"Unpaused"'
         if line:
-            print("%03d %03d " % (line[2], line[3]), end="", flush=False)
+            stri += ', "Line_X":' + str(line[2]) + ', "Line_Y":' + str(line[3])
         else:
-            print("No line ", end="", flush=False)
-        print("%06.2f %06.2f" % (throttle, steering), end="", flush=False)
-        print(" %04.1f" % (fps), end="", flush=False)
-        print(" %03d" % (threshold), end="", flush=False)
-        print("\r", end="", flush=True)
+            stri += ', "Line_X":"No Line", "Line_Y":"No Line"'
+        stri += ',"Throttle":' + str(self.throttle) + ',"Steering":' + \
+            str(self.steering) 
+        stri += ',"FPS":' + str(self.fps) + ',"Min_Threshold":' + \
+            str(threshold) + '}'
+        print(stri, "\r", end="", flush=True, file=self.status_file)
         return ""
-
