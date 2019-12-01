@@ -32,8 +32,12 @@ class mjs_filter:
         try:
             self.line = False
             self.pixel_cnt = 0
-            self.pixel_cnt_min = int(self.c.c.jsondata["PERCENT_THRESHOLD_MIN"]*self.c.c.roi_masks[2][3])
-            self.pixel_cnt_max = int(self.c.c.jsondata["PERCENT_THRESHOLD_MAX"]*self.c.c.roi_masks[2][3])
+            self.pixel_cnt_min = int(
+                self.c.c.jsondata["PERCENT_THRESHOLD_MIN"]* \
+                self.c.c.roi_masks[2][3])
+            self.pixel_cnt_max = int(
+                self.c.c.jsondata["PERCENT_THRESHOLD_MAX"]* \
+                self.c.c.roi_masks[2][3])
             for roi_mask in self.c.c.roi_masks:
                 # roi_mask[0] pixels in from the sides
                 # roi_mask[1] pixels down from the top
@@ -45,29 +49,42 @@ class mjs_filter:
                     self.bottom = roi_mask[1] + roi_mask[2] - 1
                     self.left = roi_mask[0]
                     self.right = self.c.c.jsondata["FRAME_WIDTH"]-roi_mask[0]-1
-                    self.blue = self.frame[ self.top : self.bottom , self.left : self.right , 0 ]
+                    self.blue = self.frame[ 
+                        self.top : self.bottom , self.left : self.right , 0 ]
                     # Zero out pixels below self.threshold
-                    self.thresh_mask = cv2.inRange(self.blue, self.c.c.threshold, 255)
+                    self.thresh_mask = cv2.inRange(
+                        self.blue, self.c.c.threshold, 255)
                     # Get array of pixel locations that are non-zero
                     self.pixelpoints = cv2.findNonZero(self.thresh_mask)
                     if self.pixelpoints is not None:
                         self.pixel_cnt = self.pixelpoints.size
-                        self.pixel_cnt_min = int(self.c.c.jsondata["PERCENT_THRESHOLD_MIN"]*roi_mask[3])
-                        self.pixel_cnt_max = int(self.c.c.jsondata["PERCENT_THRESHOLD_MAX"]*roi_mask[3])
+                        self.pixel_cnt_min = int(
+                            self.c.c.jsondata["PERCENT_THRESHOLD_MIN"]* \
+                            roi_mask[3])
+                        self.pixel_cnt_max = int(
+                            self.c.c.jsondata["PERCENT_THRESHOLD_MAX"]* \
+                            roi_mask[3])
                         self.vx = 0
                         self.vy = 1
                         self.y = int((self.top+self.bottom) / 2)
-                        self.x = int(self.pixelpoints[:,:,0].mean()) + roi_mask[0]
+                        self.x = int(
+                            self.pixelpoints[:,:,0].mean()) + roi_mask[0]
                         self.line = [self.vx,self.vy,self.x,self.y]
                         if self.c.c.jsondata["BINARY_VIEW"]:
-                            self.thresh_color = cv2.cvtColor(self.thresh_mask, cv2.COLOR_GRAY2BGR)
-                            self.frame[ self.top : self.bottom , self.left : self.right ] = self.thresh_color
+                            self.thresh_color = cv2.cvtColor(
+                                self.thresh_mask, cv2.COLOR_GRAY2BGR)
+                            self.frame[ 
+                                self.top : self.bottom , 
+                                self.left : self.right ] = self.thresh_color
 
             self.status = self.c.update(self.line, self.c.c.threshold)
             if self.c.c.jsondata["BINARY_VIEW"]:
-                #cv2.putText(self.frame, self.status, (10,self.FRAME_HEIGHT-(int(self.FRAME_HEIGHT/4))), self.FONT, 0.3, (150,150,255))
+                #cv2.putText(self.frame, self.status, 
+                #    (10,self.FRAME_HEIGHT-(int(self.FRAME_HEIGHT/4))), 
+                #    self.FONT, 0.3, (150,150,255))
                 if self.line:
-                    self.frame = cv2.line(self.frame, (self.x,0), (self.x,self.y), (0,255,0), 2)
+                    self.frame = cv2.line(
+                        self.frame, (self.x,0), (self.x,self.y), (0,255,0), 2)
 
             # Adjust self.threshold if finding too few or too many pixels
             if self.pixel_cnt > self.pixel_cnt_max:

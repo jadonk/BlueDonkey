@@ -4,15 +4,17 @@ import os, sys, subprocess, socket
 
 def start_mjpg_streamer():
     print("Starting up mjpg_streamer.")
-    # TODO: Add notification if either mjpg-streamer or cvfilter_py.so aren't installed
-    # TODO: Detect any error if process exits, such as the uvcvideo crash I'm seeing
+    # TODO: Add notification if either mjpg-streamer or
+    #       cvfilter_py.so aren't installed
+    # TODO: Detect any error if process exits, 
+    #       such as the uvcvideo crash I'm seeing
     subprocess.run(["mjpg_streamer", "-i",
         "input_opencv.so -r 640x480 --filter /usr/lib/mjpg-streamer/cvfilter_py.so --fargs " + os.path.realpath(__file__),
         "-o",
         "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],
         stdin=subprocess.PIPE
-        #, stdout=subprocess.PIPE       #Commented to allow visibility of
-        #, stderr=subprocess.PIPE       #responses from the system on commandline
+        #, stdout=subprocess.PIPE   #Commented to allow visibility of
+        #, stderr=subprocess.PIPE   #responses from the system on commandline
         )
 
 if __name__ == "__main__":
@@ -21,7 +23,8 @@ if __name__ == "__main__":
 # This method is called by the mjpg_streamer command run above. 
 # This is what calls and executes the running code
 def init_filter():
-    ## Socket streams that were here previously are now moved to multiple sockets where they are used.
+    ##  Socket streams that were here previously are 
+    ##  now moved to multiple sockets where they are used.
     import line_follower
     dc = dummy_car_control()
     f = line_follower.mjs_filter(dc)
@@ -31,6 +34,7 @@ def init_filter():
 # This class houses the car_control class
 class dummy_car_control():
     def __init__(self):
+        ## Commented per jkridner's advice
         import car_control
         self.c = car_control.car_control()
         
@@ -47,7 +51,8 @@ class dummy_car_control():
         return
 
     def update(self, line, threshold):
-        (self.paused, self.throttle, self.steering, self.fps) = self.c.update(line)
+        (self.paused, self.throttle, self.steering, self.fps) = \
+            self.c.update(line)
         
         # Code has been reworked to output to a separate filehandle pointing 
         # to the socket 3004, output to the dashboard under 'Status'
@@ -61,7 +66,9 @@ class dummy_car_control():
             stri += ', "Line_X":' + str(line[2]) + ', "Line_Y":' + str(line[3])
         else:
             stri += ', "Line_X":"No Line", "Line_Y":"No Line"'
-        stri += ',"Throttle":' + str(self.throttle) + ',"Steering":' + str(self.steering) 
-        stri += ',"FPS":' + str(self.fps) + ',"Min_Threshold":' + str(threshold) + '}'
+        stri += ',"Throttle":' + str(self.throttle) + ',"Steering":' + \
+            str(self.steering) 
+        stri += ',"FPS":' + str(self.fps) + ',"Min_Threshold":' + \
+            str(threshold) + '}'
         print(stri, "\r", end="", flush=True, file=self.status_file)
         return ""
