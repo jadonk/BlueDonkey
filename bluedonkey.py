@@ -9,16 +9,17 @@ def start_mjpg_streamer():
     subprocess.run(["mjpg_streamer", "-i",
         "input_opencv.so -r 640x480 --filter /usr/lib/mjpg-streamer/cvfilter_py.so --fargs " + os.path.realpath(__file__),
         "-o",
-        "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],         ## DISABLE CAMERA FOR DEBUG  -- RE-ENEABLE
+        "output_http.so -p 8090 -w /usr/share/mjpg-streamer/www"],
         stdin=subprocess.PIPE
         #, stdout=subprocess.PIPE       #Commented to allow visibility of
         #, stderr=subprocess.PIPE       #responses from the system on commandline
         )
 
 if __name__ == "__main__":
-    start_mjpg_streamer()                      
-    pass
+    start_mjpg_streamer()
 
+# This method is called by the mjpg_streamer command run above. 
+# This is what calls and executes the running code
 def init_filter():
     ## Socket streams that were here previously are now moved to multiple sockets where they are used.
     import line_follower
@@ -27,9 +28,9 @@ def init_filter():
     print("Returning process")
     return f.process
 
+# This class houses the car_control class
 class dummy_car_control():
     def __init__(self):
-        ## Commented per jkridner's advice
         import car_control
         self.c = car_control.car_control()
         
@@ -38,7 +39,7 @@ class dummy_car_control():
         self.status_out = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.status_out.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         self.status_out.connect(("", self.status_port))
-        # This filehandle sends the data from the socket broadcast
+        # This filehandle sends the data to the socket broadcast
         self.status_file = self.status_out.makefile('w', buffering=None)
 
     def tick(self):
@@ -50,7 +51,7 @@ class dummy_car_control():
         
         # Code has been reworked to output to a separate filehandle pointing 
         # to the socket 3004, output to the dashboard under 'Status'
-        
+        # Replaced the Status output below to be a JSON string
         stri = "{"
         if self.paused:
             stri += '"Status":"Paused"'
