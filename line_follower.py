@@ -20,6 +20,8 @@ class mjs_filter:
         
         # Variable initialization in line_follower.py was moved to 
         # car_control.py load() method and references changed to support that. 
+        # Unfortunately it gets kind of ugly.
+        # This was necessary to allow the variables to be updated via json,
         # as car_control.py couldn't easily set variables in line_follower.py.
         # Thus 'self.c' refers to the 'dummy_car_control' object and
         # 'self.c.c' refers to the 'car_control' object in 'dummy_car_control'.

@@ -1,35 +1,225 @@
 [
     {
-        "id": "e3fd3532.dbcba8",
+        "id": "a1e29da3.5e856",
         "type": "tab",
         "label": "BlueDonkey Dashboard",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "1bfa8d81.e67b02",
-        "type": "ui_template",
-        "z": "e3fd3532.dbcba8",
-        "group": "7c787ee9.a212f",
-        "name": "",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "format": "<img src=\"https://hackster.imgix.net/uploads/attachments/464262/beagleboneblue_blink_LED.png?auto=compress%2Cformat&amp;w=1280&amp;h=960&amp;fit=max\" />\n",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "templateScope": "local",
-        "x": 360,
-        "y": 40,
-        "wires": [
-            []
-        ]
+        "id": "a30aeb1b.ead7c8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Camera",
+        "tab": "8facd9f3.a18cb8",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
     },
     {
-        "id": "eca802ca.356fe",
+        "id": "be4b9b84.158958",
+        "type": "ui_group",
+        "z": "",
+        "name": "Controls",
+        "tab": "8facd9f3.a18cb8",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "d1a91399.ff32",
+        "type": "ui_group",
+        "z": "",
+        "name": "Console",
+        "tab": "8facd9f3.a18cb8",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "a79d6d91.58072",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Settings",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8facd9f3.a18cb8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home Page",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c305f5.d1c35a08",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "844e7c5a.d23f3",
+        "type": "ui_group",
+        "z": "",
+        "name": "Current Settings",
+        "tab": "a79d6d91.58072",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "74800c24.ed1014",
+        "type": "ui_group",
+        "z": "",
+        "name": "Edit Settings",
+        "tab": "a79d6d91.58072",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "e63e0904.d4e478",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "be4b9b84.158958",
+        "order": 4,
+        "width": "2",
+        "height": 1
+    },
+    {
+        "id": "8383782.1957788",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "be4b9b84.158958",
+        "order": 5,
+        "width": "8",
+        "height": "2"
+    },
+    {
+        "id": "e216779d.c37a68",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "be4b9b84.158958",
+        "order": 3,
+        "width": "8",
+        "height": 1
+    },
+    {
+        "id": "2cb1d814.89d158",
+        "type": "ui_spacer",
+        "name": "spacer",
+        "group": "844e7c5a.d23f3",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "bbf157e5.7ca138",
         "type": "inject",
-        "z": "e3fd3532.dbcba8",
-        "name": "startup",
+        "z": "a1e29da3.5e856",
+        "name": "startup - send timestamp",
         "topic": "startup",
         "payload": "",
         "payloadType": "date",
@@ -37,293 +227,1348 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 158,
-        "y": 37,
+        "x": 130,
+        "y": 100,
         "wires": [
             [
-                "1bfa8d81.e67b02",
-                "edad301f.6f497"
+                "180010c6.9dd4af",
+                "6af3bb13.472904",
+                "6fe5b39b.1ded3c"
             ]
         ]
     },
     {
-        "id": "46df3e7.79a07c",
+        "id": "ec92c923.57f488",
         "type": "ui_template",
-        "z": "e3fd3532.dbcba8",
-        "group": "91a2ff29.dd051",
+        "z": "a1e29da3.5e856",
+        "group": "a30aeb1b.ead7c8",
         "name": "camera",
         "order": 0,
         "width": "8",
-        "height": "8",
+        "height": "6",
         "format": "<img ng-src=\"{{msg.payload}}\" width=\"320\" height=\"240\" alt=\"image\" />\n<!--\n<img src=\"http://192.168.7.2:8090/?action=stream\" width=\"320\" height=\"240\" alt=\"image\" />\n-->",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "templateScope": "local",
-        "x": 452.5,
-        "y": 117,
+        "x": 700,
+        "y": 140,
         "wires": [
             []
         ]
     },
     {
-        "id": "e778241f.93ca78",
+        "id": "83af35aa.155288",
         "type": "function",
-        "z": "e3fd3532.dbcba8",
+        "z": "a1e29da3.5e856",
         "name": "inject url",
         "func": "msg.payload = \"http://\" + msg.payload[0].address + \":8090/?action=stream\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 289.16666412353516,
-        "y": 174.77777862548828,
+        "x": 520,
+        "y": 140,
         "wires": [
             [
-                "46df3e7.79a07c",
-                "7d40d841.010ee8"
+                "ec92c923.57f488",
+                "4bc3fb.dae97c04"
             ]
         ]
     },
     {
-        "id": "f1125624.1ece78",
-        "type": "file",
-        "z": "e3fd3532.dbcba8",
-        "name": "red",
-        "filename": "/sys/class/leds/red/brightness",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "true",
-        "x": 470,
-        "y": 460,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "33c5ae4c.2be942",
-        "type": "ui_switch",
-        "z": "e3fd3532.dbcba8",
-        "name": "",
-        "label": "red",
-        "tooltip": "",
-        "group": "6e257b08.90f294",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "decouple": "false",
-        "topic": "",
-        "style": "",
-        "onvalue": "1",
-        "onvalueType": "num",
-        "onicon": "",
-        "oncolor": "",
-        "offvalue": "0",
-        "offvalueType": "num",
-        "officon": "",
-        "offcolor": "",
-        "x": 170,
-        "y": 460,
-        "wires": [
-            [
-                "f1125624.1ece78"
-            ]
-        ]
-    },
-    {
-        "id": "244ac9ce.1656b6",
-        "type": "file",
-        "z": "e3fd3532.dbcba8",
-        "name": "green",
-        "filename": "/sys/class/leds/green/brightness",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "true",
-        "x": 470,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "690d20fd.9b8c4",
-        "type": "ui_switch",
-        "z": "e3fd3532.dbcba8",
-        "name": "",
-        "label": "green",
-        "tooltip": "",
-        "group": "6e257b08.90f294",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "decouple": "false",
-        "topic": "",
-        "style": "",
-        "onvalue": "1",
-        "onvalueType": "num",
-        "onicon": "",
-        "oncolor": "",
-        "offvalue": "0",
-        "offvalueType": "num",
-        "officon": "",
-        "offcolor": "",
-        "x": 170,
-        "y": 520,
-        "wires": [
-            [
-                "244ac9ce.1656b6"
-            ]
-        ]
-    },
-    {
-        "id": "7d40d841.010ee8",
+        "id": "4bc3fb.dae97c04",
         "type": "debug",
-        "z": "e3fd3532.dbcba8",
+        "z": "a1e29da3.5e856",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 450,
-        "y": 160,
+        "x": 710,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "edad301f.6f497",
-        "type": "hostip",
-        "z": "e3fd3532.dbcba8",
-        "name": "Host IP",
-        "x": 165.55555725097656,
-        "y": 103.33334350585938,
-        "wires": [
-            [
-                "e778241f.93ca78",
-                "4cc46570.33e7dc"
-            ]
-        ]
-    },
-    {
-        "id": "4cc46570.33e7dc",
+        "id": "6a2eaae5.60bd44",
         "type": "debug",
-        "z": "e3fd3532.dbcba8",
+        "z": "a1e29da3.5e856",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 532.2222222222222,
-        "y": 65.55555555555556,
+        "x": 530,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "993f3691.b619d8",
+        "id": "107ec2c5.90050d",
         "type": "udp in",
-        "z": "e3fd3532.dbcba8",
+        "z": "a1e29da3.5e856",
         "name": "bluedonkey out",
         "iface": "",
-        "port": "3001",
+        "port": "3004",
         "ipv": "udp4",
         "multicast": "false",
         "group": "",
         "datatype": "utf8",
-        "x": 195.50894165039062,
-        "y": 295.83631134033203,
+        "x": 400,
+        "y": 720,
         "wires": [
             [
-                "e3e99964.c28e28",
-                "ff0d16b6.da76b8"
+                "4489b26e.a3c52c",
+                "6cbc3404.8f1a0c"
             ]
         ]
     },
     {
-        "id": "e3e99964.c28e28",
+        "id": "71100067.eba35",
         "type": "ui_text",
-        "z": "e3fd3532.dbcba8",
-        "group": "145c88a3.bb04f7",
-        "order": 0,
-        "width": "2",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 2,
+        "width": "4",
         "height": "1",
         "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "x": 464.5119323730469,
-        "y": 292.5922622680664,
+        "label": "Line X:",
+        "format": "{{msg.payload.Line_X}}",
+        "layout": "row-center",
+        "x": 740,
+        "y": 700,
         "wires": []
     },
     {
-        "id": "ff0d16b6.da76b8",
+        "id": "4489b26e.a3c52c",
         "type": "debug",
-        "z": "e3fd3532.dbcba8",
+        "z": "a1e29da3.5e856",
         "name": "",
         "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
-        "x": 421.5119342803955,
-        "y": 239.94942474365234,
+        "x": 570,
+        "y": 700,
         "wires": []
     },
     {
-        "id": "7c787ee9.a212f",
-        "type": "ui_group",
-        "z": "",
-        "name": "Board",
-        "tab": "c98b1e6c.9aa61",
+        "id": "180010c6.9dd4af",
+        "type": "hostip",
+        "z": "a1e29da3.5e856",
+        "name": "Host IP",
+        "x": 380,
+        "y": 120,
+        "wires": [
+            [
+                "83af35aa.155288",
+                "6a2eaae5.60bd44"
+            ]
+        ]
+    },
+    {
+        "id": "628bc9b1.355b28",
+        "type": "exec",
+        "z": "a1e29da3.5e856",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 1210,
+        "y": 380,
+        "wires": [
+            [
+                "9c8641da.63b71"
+            ],
+            [
+                "9c8641da.63b71"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9c8641da.63b71",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1350,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "c4af34c1.b34fd8",
+        "type": "ui_switch",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "label": "Pause/Unpause",
+        "tooltip": "Toggle to pause or unpause the car",
+        "group": "be4b9b84.158958",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "Unpause",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "Pause",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "f8f261c9.8ed3"
+            ]
+        ]
+    },
+    {
+        "id": "292342db.830ace",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status:",
+        "format": "{{msg.payload.Status}}",
+        "layout": "col-center",
+        "x": 1150,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "7afa99bb.93dda8",
+        "type": "udp in",
+        "z": "a1e29da3.5e856",
+        "name": "bluedonkey out",
+        "iface": "",
+        "port": "3005",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 400,
+        "y": 820,
+        "wires": [
+            [
+                "5c3d869b.49c0b8",
+                "41c4face.c62834"
+            ]
+        ]
+    },
+    {
+        "id": "5c3d869b.49c0b8",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 8,
+        "width": "8",
+        "height": "2",
+        "name": "",
+        "label": "Last Commmand:",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 590,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "41c4face.c62834",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 570,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "9d995793.4900b8",
+        "type": "udp in",
+        "z": "a1e29da3.5e856",
+        "name": "bluedonkey out",
+        "iface": "",
+        "port": "3006",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 400,
+        "y": 920,
+        "wires": [
+            [
+                "16691798.ad5f58",
+                "4ef1d15.2699d3"
+            ]
+        ]
+    },
+    {
+        "id": "16691798.ad5f58",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 570,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "a8b60d9.6fb37f",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "JSON->JS",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1070,
+        "y": 560,
+        "wires": [
+            [
+                "10c75d3e.353863"
+            ]
+        ]
+    },
+    {
+        "id": "c38a24ef.818298",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 950,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "402e4b4d.dfb504",
+        "type": "ui_form",
+        "z": "a1e29da3.5e856",
+        "name": "Settings Form 1",
+        "label": "",
+        "group": "74800c24.ed1014",
+        "order": 2,
+        "width": "6",
+        "height": "5",
+        "options": [
+            {
+                "label": "Color Threshold Delta",
+                "value": "COLOR_THRESHOLD_DELTA",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Color Threshold Max",
+                "value": "COLOR_THRESHOLD_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Color Threshold Min",
+                "value": "COLOR_THRESHOLD_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Frame Height",
+                "value": "FRAME_HEIGHT",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Frame Width",
+                "value": "FRAME_WIDTH",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Mixing Rate",
+                "value": "MIXING_RATE",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Percent Threshold Max",
+                "value": "PERCENT_THRESHOLD_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Percent Threshold Min",
+                "value": "PERCENT_THRESHOLD_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering D Gain",
+                "value": "STEERING_D_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering I Gain",
+                "value": "STEERING_I_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering I Max",
+                "value": "STEERING_I_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering I Min",
+                "value": "STEERING_I_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering Offset",
+                "value": "STEERING_OFFSET",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering P Gain",
+                "value": "STEERING_P_GAIN",
+                "type": "number",
+                "required": false
+            }
+        ],
+        "formValue": {
+            "COLOR_THRESHOLD_DELTA": "",
+            "COLOR_THRESHOLD_MAX": "",
+            "COLOR_THRESHOLD_MIN": "",
+            "FRAME_HEIGHT": "",
+            "FRAME_WIDTH": "",
+            "MIXING_RATE": "",
+            "PERCENT_THRESHOLD_MAX": "",
+            "PERCENT_THRESHOLD_MIN": "",
+            "STEERING_D_GAIN": "",
+            "STEERING_I_GAIN": "",
+            "STEERING_I_MAX": "",
+            "STEERING_I_MIN": "",
+            "STEERING_OFFSET": "",
+            "STEERING_P_GAIN": ""
+        },
+        "payload": "",
+        "submit": "save",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 400,
+        "y": 560,
+        "wires": [
+            [
+                "10c75d3e.353863",
+                "a1145436.d7ff88"
+            ]
+        ]
+    },
+    {
+        "id": "d2f3ad9e.d2aca",
+        "type": "inject",
+        "z": "a1e29da3.5e856",
+        "name": "startup - send 'pause'",
+        "topic": "",
+        "payload": "Pause",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 380,
+        "wires": [
+            [
+                "c4af34c1.b34fd8"
+            ]
+        ]
+    },
+    {
+        "id": "3702c707.48dff8",
+        "type": "ui_ui_control",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "x": 560,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6bfed34d.0aab4c",
+        "type": "ui_button",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "group": "be4b9b84.158958",
         "order": 6,
-        "disp": true,
-        "width": "8",
-        "collapse": false
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "label": "Open Settings",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Settings",
+        "payloadType": "str",
+        "topic": "",
+        "x": 400,
+        "y": 500,
+        "wires": [
+            [
+                "3702c707.48dff8"
+            ]
+        ]
     },
     {
-        "id": "91a2ff29.dd051",
-        "type": "ui_group",
-        "z": "",
-        "name": "Camera",
-        "tab": "e2fcadce.0e4f4",
+        "id": "9fd65c63.940b8",
+        "type": "ui_ui_control",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "x": 540,
+        "y": 440,
+        "wires": [
+            [
+                "6af3bb13.472904"
+            ]
+        ]
+    },
+    {
+        "id": "90221c80.9567d",
+        "type": "ui_button",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "group": "844e7c5a.d23f3",
+        "order": 2,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "label": "Return Home",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Home Page",
+        "payloadType": "str",
+        "topic": "",
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "9fd65c63.940b8"
+            ]
+        ]
+    },
+    {
+        "id": "4ef1d15.2699d3",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 550,
+        "y": 940,
+        "wires": [
+            [
+                "aa7a0588.efb518",
+                "16691798.ad5f58"
+            ]
+        ]
+    },
+    {
+        "id": "aa7a0588.efb518",
+        "type": "ui_table",
+        "z": "a1e29da3.5e856",
+        "group": "844e7c5a.d23f3",
+        "name": "Editor Settings Table",
+        "order": 3,
+        "width": "6",
+        "height": "15",
+        "columns": [
+            {
+                "field": "Name",
+                "title": "Variable",
+                "width": "70%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "Value",
+                "title": "Value",
+                "width": "",
+                "align": "right",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 740,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "6aa429af.9d8698",
+        "type": "function",
+        "z": "a1e29da3.5e856",
+        "name": "Fill Missing Variables",
+        "func": "\n// For each key, if value is null then set to \n// value in node_values.json\nfor (var key in msg.payload[0]) {\n    if ( msg.payload[0][key] === null ){\n        msg.payload[0][key] = msg.payload[1][key];\n    }\n}\n// For each missing key, add it from \n// node_values.json\nfor (var key in msg.payload[1]) {\n    if (!(key in msg.payload[0])) {\n        msg.payload[0][key] = msg.payload[1][key];\n    }\n}\n// Create single output\nmsg.payload = msg.payload[0];\n// Send msg onward\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 620,
+        "wires": [
+            [
+                "c38a24ef.818298",
+                "2cf9d6d5.50fefa"
+            ]
+        ]
+    },
+    {
+        "id": "10c75d3e.353863",
+        "type": "join",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 590,
+        "y": 620,
+        "wires": [
+            [
+                "6aa429af.9d8698"
+            ]
+        ]
+    },
+    {
+        "id": "fef35dc8.ce7f3",
+        "type": "file in",
+        "z": "a1e29da3.5e856",
+        "name": "node_values.json",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 890,
+        "y": 560,
+        "wires": [
+            [
+                "a8b60d9.6fb37f"
+            ]
+        ]
+    },
+    {
+        "id": "a1145436.d7ff88",
+        "type": "delay",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "0.2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 570,
+        "y": 560,
+        "wires": [
+            [
+                "7885c250.a0831c"
+            ]
+        ]
+    },
+    {
+        "id": "cc3d42c2.592",
+        "type": "file",
+        "z": "a1e29da3.5e856",
+        "name": "node_values.json",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "x": 1330,
+        "y": 640,
+        "wires": [
+            [
+                "22ff46bb.81e11a"
+            ]
+        ]
+    },
+    {
+        "id": "2cf9d6d5.50fefa",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "JS->String",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 950,
+        "y": 640,
+        "wires": [
+            [
+                "cc3d42c2.592"
+            ]
+        ]
+    },
+    {
+        "id": "688646f1.6fe5d8",
+        "type": "ui_dropdown",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "label": "Profile Selection",
+        "tooltip": "",
+        "place": "Select Profile:",
+        "group": "be4b9b84.158958",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [],
+        "payload": "",
+        "topic": "",
+        "x": 640,
+        "y": 340,
+        "wires": [
+            [
+                "b23cecd3.c6b62",
+                "b8da045a.d9ba38"
+            ]
+        ]
+    },
+    {
+        "id": "a23cb1d2.cc801",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "options",
+        "x": 630,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "6af3bb13.472904",
+        "type": "fs-ops-dir",
+        "z": "a1e29da3.5e856",
+        "name": "Check Profiles Directory",
+        "path": "path.PROFILE",
+        "pathType": "global",
+        "filter": "*",
+        "filterType": "str",
+        "dir": "options",
+        "dirType": "msg",
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "a23cb1d2.cc801",
+                "688646f1.6fe5d8"
+            ]
+        ]
+    },
+    {
+        "id": "5cc65b7c.bbf7d4",
+        "type": "exec",
+        "z": "a1e29da3.5e856",
+        "command": "cp ",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 850,
+        "y": 220,
+        "wires": [
+            [],
+            [],
+            [
+                "6af3bb13.472904"
+            ]
+        ]
+    },
+    {
+        "id": "82eb8a04.f55ac8",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "Append/Prepend",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$globalContext('path.PROFILE') & 'node_values.json' & \t' ' & $globalContext('path.PROFILE') & payload.name & \t'.json'\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "f873eca4.d0dfe",
+                "5cc65b7c.bbf7d4"
+            ]
+        ]
+    },
+    {
+        "id": "f873eca4.d0dfe",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 870,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "331817d8.d92238",
+        "type": "ui_form",
+        "z": "a1e29da3.5e856",
+        "name": "Save Current Settings as a file",
+        "label": "",
+        "group": "74800c24.ed1014",
+        "order": 1,
+        "width": "12",
+        "height": "2",
+        "options": [
+            {
+                "label": "Save Current Settings to Profile with Name:",
+                "value": "name",
+                "type": "text",
+                "required": false
+            }
+        ],
+        "formValue": {
+            "name": ""
+        },
+        "payload": "",
+        "submit": "save",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "82eb8a04.f55ac8"
+            ]
+        ]
+    },
+    {
+        "id": "5d532d2b.a87174",
+        "type": "ui_form",
+        "z": "a1e29da3.5e856",
+        "name": "Settings Form 2",
+        "label": "",
+        "group": "74800c24.ed1014",
+        "order": 3,
+        "width": "6",
+        "height": "5",
+        "options": [
+            {
+                "label": "Steering Servo Max",
+                "value": "STEERING_SERVO_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Steering Servo Min",
+                "value": "STEERING_SERVO_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Cut Off Angle",
+                "value": "THROTTLE_CUT_OFF_ANGLE",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Cut Off Rate",
+                "value": "THROTTLE_CUT_OFF_RATE",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle D Gain",
+                "value": "THROTTLE_D_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Gain",
+                "value": "THROTTLE_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle I Gain",
+                "value": "THROTTLE_I_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle I Max",
+                "value": "THROTTLE_I_MAX",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle I Min",
+                "value": "THROTTLE_I_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Offset",
+                "value": "THROTTLE_OFFSET",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle P Gain",
+                "value": "THROTTLE_P_GAIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Servo Min",
+                "value": "THROTTLE_SERVO_MIN",
+                "type": "number",
+                "required": false
+            },
+            {
+                "label": "Throttle Servo Max",
+                "value": "THROTTLE_SERVO_MAX",
+                "type": "number",
+                "required": false
+            }
+        ],
+        "formValue": {
+            "STEERING_SERVO_MAX": "",
+            "STEERING_SERVO_MIN": "",
+            "THROTTLE_CUT_OFF_ANGLE": "",
+            "THROTTLE_CUT_OFF_RATE": "",
+            "THROTTLE_D_GAIN": "",
+            "THROTTLE_GAIN": "",
+            "THROTTLE_I_GAIN": "",
+            "THROTTLE_I_MAX": "",
+            "THROTTLE_I_MIN": "",
+            "THROTTLE_OFFSET": "",
+            "THROTTLE_P_GAIN": "",
+            "THROTTLE_SERVO_MIN": "",
+            "THROTTLE_SERVO_MAX": ""
+        },
+        "payload": "",
+        "submit": "save",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 400,
+        "y": 600,
+        "wires": [
+            [
+                "a1145436.d7ff88",
+                "10c75d3e.353863"
+            ]
+        ]
+    },
+    {
+        "id": "6cbc3404.8f1a0c",
+        "type": "json",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 590,
+        "y": 740,
+        "wires": [
+            [
+                "71100067.eba35",
+                "a5d3bc03.35237",
+                "ff23843a.42c1c8",
+                "5c431b26.9d9b64",
+                "93d9eb8d.603cf8",
+                "ba2a5dba.8178d",
+                "292342db.830ace"
+            ]
+        ]
+    },
+    {
+        "id": "a5d3bc03.35237",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 3,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "Line Y:",
+        "format": "{{msg.payload.Line_Y}}",
+        "layout": "row-center",
+        "x": 730,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "ff23843a.42c1c8",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
         "order": 4,
-        "disp": true,
-        "width": "8",
-        "collapse": false
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "Throttle:",
+        "format": "{{msg.payload.Throttle}}",
+        "layout": "row-center",
+        "x": 900,
+        "y": 700,
+        "wires": []
     },
     {
-        "id": "6e257b08.90f294",
-        "type": "ui_group",
-        "z": "",
-        "name": "Controls",
-        "tab": "e2fcadce.0e4f4",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
+        "id": "5c431b26.9d9b64",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 5,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "Steering Angle:",
+        "format": "{{msg.payload.Steering}}",
+        "layout": "row-center",
+        "x": 880,
+        "y": 740,
+        "wires": []
     },
     {
-        "id": "145c88a3.bb04f7",
-        "type": "ui_group",
-        "z": "",
-        "name": "Console",
-        "tab": "e2fcadce.0e4f4",
-        "disp": true,
-        "width": "6",
-        "collapse": false
+        "id": "93d9eb8d.603cf8",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 6,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "FPS:",
+        "format": "{{msg.payload.FPS}}",
+        "layout": "row-center",
+        "x": 1030,
+        "y": 700,
+        "wires": []
     },
     {
-        "id": "c98b1e6c.9aa61",
-        "type": "ui_tab",
-        "name": "Tab 2",
-        "icon": "dashboard",
-        "order": 2
+        "id": "ba2a5dba.8178d",
+        "type": "ui_text",
+        "z": "a1e29da3.5e856",
+        "group": "d1a91399.ff32",
+        "order": 7,
+        "width": "4",
+        "height": "1",
+        "name": "",
+        "label": "Min Threshold:",
+        "format": "{{msg.payload.Min_Threshold}}",
+        "layout": "row-center",
+        "x": 1060,
+        "y": 740,
+        "wires": []
     },
     {
-        "id": "e2fcadce.0e4f4",
-        "type": "ui_tab",
-        "z": "",
-        "name": "BeagleBone AI - BlueDonkey",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
+        "id": "44d6ffda.2209e",
+        "type": "exec",
+        "z": "a1e29da3.5e856",
+        "command": "cp ",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 990,
+        "y": 340,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b23cecd3.c6b62",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "Prepend",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$globalContext('path.PROFILE') & payload & \t' ' & $globalContext('path.PROFILE') & \t'node_values.json'\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 320,
+        "wires": [
+            [
+                "9bdd28da.d2a3e8",
+                "44d6ffda.2209e"
+            ]
+        ]
+    },
+    {
+        "id": "9bdd28da.d2a3e8",
+        "type": "debug",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1010,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b8da045a.d9ba38",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "Prepend",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'LOADCUSTOM ' & $globalContext('path.PROFILE') & payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 360,
+        "wires": [
+            [
+                "f8f261c9.8ed3"
+            ]
+        ]
+    },
+    {
+        "id": "ddfc3298.fc056",
+        "type": "inject",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "topic": "",
+        "payload": "default_values.json",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "b23cecd3.c6b62"
+            ]
+        ]
+    },
+    {
+        "id": "6fe5b39b.1ded3c",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "Set Global Path",
+        "rules": [
+            {
+                "t": "set",
+                "p": "path",
+                "pt": "global",
+                "to": "{\"PATH\":\"/opt/bluedonkey/\",\"PROFILE\":\"/opt/bluedonkey/profiles/\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f8f261c9.8ed3",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$globalContext('path.PATH') & 'client.py ' & payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 380,
+        "wires": [
+            [
+                "628bc9b1.355b28",
+                "9c8641da.63b71"
+            ]
+        ]
+    },
+    {
+        "id": "7885c250.a0831c",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "prepend",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$globalContext('path.PROFILE') & 'node_values.json'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 560,
+        "wires": [
+            [
+                "fef35dc8.ce7f3"
+            ]
+        ]
+    },
+    {
+        "id": "733611fd.3b9fe",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$globalContext('path.PROFILE') & 'node_values.json'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1130,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22ff46bb.81e11a",
+        "type": "change",
+        "z": "a1e29da3.5e856",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "LOADNODE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 640,
+        "wires": [
+            [
+                "f8f261c9.8ed3"
+            ]
+        ]
     }
 ]
