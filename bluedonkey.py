@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import os, sys, subprocess, socket
-from random import randint
 #import cgroups
-
 
 def start_mjpg_streamer():
     print("Starting up mjpg_streamer.")
@@ -54,15 +52,15 @@ class dummy_car_control():
         # to the socket 3004, output to the dashboard under 'Status'
         
         stri = "{"
-        if line:
-            stri += '"Line_X":' + str(line[2]) + ', "Line_Y":' + str(line[3]) + ','
-            #print("%03d %03d " % (line[2], line[3]), end="", flush=False, file=self.status_file)
+        if self.paused:
+            stri += '"Status":"Paused"'
         else:
-            stri += '"Line_X":"No Line", "Line_Y":"No Line",'
-        stri += '"Throttle":' + str(self.throttle) + ',"Steering":' + str(self.steering) + ',"FPS":' + str(self.fps) + ',"Min_Threshold":' + str(threshold) + '}'
-#       print("%06.2f %06.2f" % (self.throttle, self.steering), end="", flush=False, file=self.status_file)
-#       print(" %04.1f" % (self.fps), end="", flush=False, file=self.status_file)
-#       print(" %03d" % (threshold), end=" ", flush=False, file=self.status_file)
-#       print("Live Tracker: ",randint(0,100), flush=False, file=self.status_file)
+            stri += '"Status":"Unpaused"'
+        if line:
+            stri += ', "Line_X":' + str(line[2]) + ', "Line_Y":' + str(line[3])
+        else:
+            stri += ', "Line_X":"No Line", "Line_Y":"No Line"'
+        stri += ',"Throttle":' + str(self.throttle) + ',"Steering":' + str(self.steering) 
+        stri += ',"FPS":' + str(self.fps) + ',"Min_Threshold":' + str(threshold) + '}'
         print(stri, "\r", end="", flush=True, file=self.status_file)
         return ""

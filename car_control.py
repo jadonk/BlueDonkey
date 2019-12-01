@@ -85,11 +85,17 @@ class car_control:
         self.tabledata = []
         # Throw all of the dicts into the list
         for key in self.jsondata:
+            # Don't send the variable BINARY_VIEW
             if key == 'BINARY_VIEW':
                 continue;
             self.tabledata.append({ "Name":key, "Value":self.jsondata[key] })
+        # Helper to sort data by 'Name' field
+        def helpsort(json):
+            return json["Name"]
+        # Sort the data 
+        self.tabledata.sort(key=helpsort)
         # Print the list -- This will cause a Node-RED error that can be ignored
-        print(json.dumps(self.tabledata, sort_keys=True), file=self.vari_file, flush=True)
+        print(json.dumps(self.tabledata), file=self.vari_file, flush=True)
     
     def figure_out_my_steering(self, line):
         [vx,vy,x,y] = line
@@ -198,7 +204,10 @@ class car_control:
             self.steering_output = self.jsondata["STEERING_OFFSET"]
             
         # Call jsonreadout() method to update the variables on the dashboard
-        self.jsonreadout()
+        
+        if int(time.time()) > self.jsonreadouttime:
+            self.jsonreadouttime = int(time.time())
+            self.jsonreadout()
         
         # If not paused
         if not self.paused.state:
@@ -225,7 +234,7 @@ class car_control:
                     print('PAUSE triggered by client', file=self.log_file,
                                                                 flush=True)
                    # Set state to paused and send confirmation fo client (debug)
-                    self.paused.state = not self.paused.state
+                    self.paused.toggle()
                     client.send(data.encode())
         
         # If paused
@@ -255,20 +264,20 @@ class car_control:
                 # Did client.py send 'UNPAUSE'? If so then unpause
                 if data == 'UNPAUSE':
                     print('UNPAUSE triggered by client', file=self.log_file, flush=True)
-                    self.paused.state = not self.paused.state
+                    self.paused.toggle()
                     client.send(data.encode())
                     
                 # Did client.py send 'LOAD'? If so then call load
                 # TODO profiles
                 elif data == 'LOAD':
                     print('Loading values from default_values.json', file=self.log_file, flush=True)
-                    self.load('profiles/default_values.json')
+                    self.load(self.location + 'profiles/default_values.json')
                 
                 # Did client.py send 'LOADNODE'? If so then call load
                 # on the node json file
                 elif data == 'LOADNODE':
                     print("Loading values from node_values.json", file=self.log_file, flush=True)
-                    self.load('profiles/node_values.json')
+                    self.load(self.location + 'profiles/node_values.json')
                     
                 # Did client send 'LOADCUSTOM'? If so then call load
                 # on the json file path provided
@@ -281,16 +290,19 @@ class car_control:
         return(self.paused.state, self.throttle_output, self.steering_output, self.fps.get())
 
     def __init__(self):
+        # This is the location of bluedonky.py
+        self.location = '/opt/bluedonkey/'
         # This file is the initially loaded file
-        self.filename = './profiles/default_values.json'
+        self.filename = self.location + 'profiles/default_values.json'
         # Call load() to initialize variables
         self.load(self.filename)
         print("car_control load complete")
         # Start up the pause button handler
         self.paused = PauseButtonEvent()
-        self.paused.start()
+        #self.paused.start()
         self.enable_steering_and_throttle()
         self.fps = track_fps()
+        self.jsonreadouttime = int(time.time())
         
         # Input socket to receive from client.py
         self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -335,6 +347,7 @@ class PauseButtonEvent(button.ButtonEvent):
         #self.start()
     def action(self, event):
         self.toggle()
+        print('Pause button press detected, toggled between paused/unpaused', file=self.log_file, flush=True)
     def toggle(self):
         self.state = not self.state
         if self.state:
