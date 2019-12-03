@@ -6,8 +6,10 @@ BlueDonkey is a self-driving model car implementation written in Python and usin
 
 ## Setup and Installation Instructions
 
-Please refer to the installation guide below.  
+Please refer to the installation guide below:  
 [Redirect to INSTALL.md](INSTALL.md)
+
+Advanced configuration information:  
 
 
 ## Other
