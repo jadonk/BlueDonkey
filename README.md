@@ -1,54 +1,14 @@
+# BlueDonkey
 Latest version is at https://github.com/jadonk/BlueDonkey
 
-# Setup image
+BlueDonkey is a self-driving model car implementation written in Python and using Node-RED for user interface and based upon the BeagleBone-Blue or BeagleBone-AI boards.
 
-* Program the following image using Etcher.io:
-  * ~~https://rcn-ee.net/rootfs/bb.org/testing/2018-12-16/buster-iot/bone-debian-buster-iot-armhf-2018-12-16-4gb.img.xz~~
-  * ~~https://rcn-ee.net/rootfs/bb.org/testing/2019-03-24/buster-iot/bone-debian-buster-iot-armhf-2019-03-24-4gb.img.xz~~
-  * AI: https://debian.beagleboard.org/images/am57xx-debian-9.9-lxqt-armhf-2019-08-03-4gb.img.xz
-  * Black/Blue: https://debian.beagleboard.org/images/bone-debian-9.9-iot-armhf-2019-08-03-4gb.img.xz
+## Setup and Installation Instructions
 
-* Get your board on the Internet
-  * Your board should have an SSID of BeagleBone-XXXX, where XXXX is random. Password is 'BeagleBone'.
-  * Connect to http://192.168.8.1 via your web browser to get to the console/IDE.
-  * Run 'sudo connmanctl' at the console to connect to the Internet using your own access point.
-```
-scan wifi
-services
-agent on
-connect <<your access point ID>>
-quit
-```
 
-* Install BlueDonkey and dependencies
-```sh
-sudo apt update
-#sudo apt install -y python3-pygame
-sudo apt install -y python3-opencv python3-libgpiod mjpg-streamer-opencv-python socat
-git clone https://github.com/jadonk/bluedonkey
-cd bluedonkey
-```
 
-# Build car
 
-* https://github.com/Sashulik/Detroit-Autonomous-Vehicle-Group/tree/master/BeagleBone-Blue_DonkeyCar
-
-# Run
-
-```sh
-./bluedonkey.py
-```
-
-The RED LED should come up on boot.
-
-You should be able to monitor the running line follower application.
-```sh
-./bluedonkey_listen.sh
-```
-
-Press the PAU (pause) button to start driving! The RED LED should go off and the GREEN LED should turn on.
-
-# Other
+## Other
 
 Some useful links:
 * https://github.com/spmallick/learnopencv
