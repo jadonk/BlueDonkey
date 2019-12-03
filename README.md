@@ -3,9 +3,11 @@ Latest version is at https://github.com/jadonk/BlueDonkey
 
 BlueDonkey is a self-driving model car implementation written in Python and using Node-RED for user interface and based upon the BeagleBone-Blue or BeagleBone-AI boards.
 
+
 ## Setup and Installation Instructions
 
-
+Please refer to the installation guide below.  
+[Redirect to INSTALL.md](INSTALL.md)
 
 
 ## Other
