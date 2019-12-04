@@ -10,7 +10,7 @@ Please refer to the installation guide below:
 [Redirect to INSTALL.md](INSTALL.md)
 
 Advanced configuration information:  
-
+[Redirect to MOREINFO.md](MOREINFO.md)
 
 ## Other
 
