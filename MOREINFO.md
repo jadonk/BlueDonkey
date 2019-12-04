@@ -1,4 +1,4 @@
-# Information for Advanced Configurations
+## Information for Advanced Configurations
 
 * Should the Pause/Unpause switch on the dashboard be out of sync, toggling it once will reset it.
   * Using the button on a BeagleBone-Blue does not trigger the button on the dashboard.
