@@ -14,6 +14,7 @@
 * Node-RED does not store the python variables anywhere, they are only accessed and passed through to the destination.
 * Client.py must be executable (Chmod +x)
 * Changing either the Node-RED dashboard or the python code may cause the need to reload the Node-RED dashboard UI webpage.
+* The BlueDonkey systemd service may have issues at boot if it is not delayed.
 * Node-RED Specific:
   * Several debug nodes were created that can be toggled
   * The Node-RED Editor does not automatically update dashboard.json, it must be exported and saved manually.
