@@ -3,6 +3,7 @@ Description=BlueDonkey Service
 After=multi-user.target
 
 [Service]
+ExecStartPre=/bin/sleep 90
 Type=idle
 ExecStart=/opt/bluedonkey/bluedonkey.py
 CPUQuota=70%
