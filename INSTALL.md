@@ -16,11 +16,11 @@ As of the last edit to this section, the current firmwares are:
 * Black/Blue: [https://debian.beagleboard.org/images/bone-debian-9.9-iot-armhf-2019-08-03-4gb.img.xz](https://debian.beagleboard.org/images/bone-debian-9.9-iot-armhf-2019-08-03-4gb.img.xz)
 
 #### Flashing the IMG File
-First you will need to uncompress the downloaded file. On linux you may need a package such as `xz-utils`, on mac os x you may need a program like `The Unarchiver`, and on windows you may need a program like `7zip` installed.
-
 You may follow the BeagleBone guide located at [https://beagleboard.org/getting-started](https://beagleboard.org/getting-started) for instructions on using `Etcher` to flash the IMG file.
 
 ##### Advanced Users
+First you will need to uncompress the downloaded file. On linux you may need a package such as `xz-utils`, on mac os x you may need a program like `The Unarchiver`, and on windows you may need a program like `7zip` installed.
+
 Advanced users on linux can write IMG file to the micro sd card with `dd`. Example:  
 ```sudo dd bs=4M if=am57xx-debian-9.9-lxqt-armhf-2019-08-03-4gb.img of=/dev/sdc```  
 With gnu dd, you can add `status=progress` to see the progress.
